@@ -1,6 +1,7 @@
 'use strict'
 
 var React = require('react');
+var Weiqi = require('../weiqi');
 var {RouterMixin, Transition} = require('../router');
 
 var pageRoutes = require('../routes');
@@ -11,7 +12,7 @@ class App extends RouterMixin {
   render() {
     var view = this.getActiveView({ key: Date.now() });
     var transition = this.getTransition();
-  
+
     return (
       <body>
         <Transition transitionName={ transition }>

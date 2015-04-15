@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 
-var sassPaths = [ 
+var sassPaths = [
   'client/stylesheets/',
 ]
 .map(function(m){ return path.resolve(__dirname, m); })
@@ -21,7 +21,7 @@ module.exports = {
     path: "./build",
     filename: "[name].js"
   },
-  
+
   resolve: {
     modulesDirectories: [ 'node_modules' ],
     extensions: ['', '.js', '.jsx'],
@@ -37,8 +37,8 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.css$/, loader: "style!css" }, 
-      { test: /\.scss$/, loader: "style!css!sass?includePaths[]=" + sassPaths},
+      { test: /\.css$/, loader: "style!css" },
+      { test: /\.(sass|scss)$/, loader: "style!css!sass?includePaths[]=" + sassPaths},
       { test: /\.jsx$|\.js$/, loader: 'jsx?harmony!regenerator'},
       { test: /\.(woff|ttf|eot|svg|png)(\?.*)?/, loader: "url-loader" }
     ]
