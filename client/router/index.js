@@ -14,21 +14,22 @@ var router;
  */
 class RouterMixin extends React.Component {
   constructor(){
+    super();
     this.state = { _activeView: null };
   }
   /**
    * Custom methods
    */
- 
+
   /** Must be called */
   initRouter(routes){
     router = new Router(routes);
-    
+
     // Start listening to router channel
     csp.go(function*(){
       var route;
       while ((route = yield csp.take(router.chan)) !== csp.CLOSED) {
-        // Update! 
+        // Update!
         this.swapView(route);
       }
     }.bind(this));
@@ -37,7 +38,7 @@ class RouterMixin extends React.Component {
   // Swap out component and trigger update
   swapView(view){
     if(view === this.state._activeView) return;
-    
+
     // Load component async
     router.routes[view].load(function(el){
       router.nextEl = React.createFactory(el);
