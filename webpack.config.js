@@ -38,7 +38,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-      { test: /\.(sass|scss)$/, loader: "style!css!sass?includePaths[]=" + sassPaths},
+      { test: /\.scss$/, loader: "style!css!sass?includePaths[]=" + sassPaths},
       { test: /\.jsx$|\.js$/, loader: 'jsx?harmony!regenerator'},
       { test: /\.jsx$|\.js$/, loader: 'babel-loader'},
       //{ test: /jquery.*\.js$/, loader: 'expose?jq4gv' },

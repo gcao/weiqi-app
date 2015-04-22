@@ -1,6 +1,6 @@
 'use strict';
 
-var jq4gv = require('../lib/jquery');
+var jQuery = require('../lib/jquery');
 var React = require('react');
 
 import Weiqi from '../weiqi';
@@ -9,7 +9,7 @@ import SGFParser from '../weiqi/SGFParser';
 
 import Banner from './Banner';
 
-require('../stylesheets/WeiqiBoard.scss');
+require('../stylesheets/WeiqiBoard.css');
 
 export default class WeiqiBoard extends React.Component {
   getInitialState() {
@@ -18,7 +18,7 @@ export default class WeiqiBoard extends React.Component {
   componentWillMount() {
     var self = this;
     // Load game
-    jq4gv.ajax({
+    jQuery.ajax({
       url:this.props.url,
       success:function(response){
         var game = new SGFParser(Weiqi.WEIQI).parse(response);

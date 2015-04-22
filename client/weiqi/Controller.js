@@ -11,7 +11,7 @@ export default class {
 
     this.config = Weiqi.clone(Weiqi.CONFIG);
     if (config != null)
-      jq4gv.extend(this.config, config);
+      jQuery.extend(this.config, config);
 
     this.view = new Weiqi.GameView(this, this.config);
     this.reset();
@@ -57,19 +57,19 @@ export default class {
     this._initialized = false;
 
     if (this.config.container != null) {
-      var container = jq4gv("#" + this.config.container);
+      var container = jQuery("#" + this.config.container);
       if (container.get(0).nodeName == 'DIV') {
         container.empty().append(this.getPlaceHolder());
       } else {
-        if (jq4gv(this.jqId).get(0)) {
-          jq4gv(this.jqId).replaceWith(this.getPlaceHolder());
+        if (jQuery(this.jqId).get(0)) {
+          jQuery(this.jqId).replaceWith(this.getPlaceHolder());
         } else {
           container.after(this.getPlaceHolder());
         }
       }
     } else {
-      if (jq4gv(this.jqId).get(0) != null)
-        jq4gv(this.jqId).replaceWith(this.getPlaceHolder());
+      if (jQuery(this.jqId).get(0) != null)
+        jQuery(this.jqId).replaceWith(this.getPlaceHolder());
       else
         document.write(this.getPlaceHolder());
     }
@@ -79,12 +79,12 @@ export default class {
   show(){
     if (!this.initialized())
       this.init();
-    jq4gv(this.jqId).show();
+    jQuery(this.jqId).show();
     return this;
   }
 
   hide(){
-    jq4gv(this.jqId).hide();
+    jQuery(this.jqId).hide();
     return this;
   }
 
@@ -120,7 +120,7 @@ export default class {
       return this;
     }
     var _this = this;
-    jq4gv.ajax({
+    jQuery.ajax({
       url:url,
       success:function(response){
         //try {
@@ -152,7 +152,7 @@ export default class {
 
   loadSgf(sgf, n){
     try {
-      sgf = jq4gv.trim(sgf);
+      sgf = jQuery.trim(sgf);
       this.show();
       this.game = new SGFParser(this.config.gameType).parse(sgf);
       this.game.dataSize = sgf.length;
@@ -171,10 +171,10 @@ export default class {
 
   loadInline(divId, n){
     try {
-      if (jq4gv("#"+divId).length == 0){
+      if (jQuery("#"+divId).length == 0){
         return this;
       }
-      this.loadSgf(jq4gv("#"+divId).text(), n);
+      this.loadSgf(jQuery("#"+divId).text(), n);
       return this;
     } catch(e) {
       throw "GameController.loadInline('" + divId + "'): " + e;
@@ -184,12 +184,12 @@ export default class {
   refresh(force){
     var url = this.game.url;
     var _this = this;
-    jq4gv.ajax({
+    jQuery.ajax({
       url:url,
       //ifModified: true,
       success:function(response){
         try {
-          response = jq4gv.trim(response);
+          response = jQuery.trim(response);
           jsgv.debug('refresh 1');
           // if game data haven't changed, don't reload the game
           if (!force && _this.game && _this.game.dataSize && _this.game.dataSize == response.length){

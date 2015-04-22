@@ -1,4 +1,6 @@
-var jq4gv = require('../../lib/jquery');
+'use strict';
+
+var jQuery = require('../../lib/jquery');
 
 import Weiqi from '..';
 
@@ -315,7 +317,7 @@ export class Node {
   }
 
   hasComment(){
-    return this.comment != undefined && this.comment !=null && jq4gv.trim(this.comment).length > 0;
+    return this.comment != undefined && this.comment !=null && jQuery.trim(this.comment).length > 0;
   }
 
   hasBranches(){
@@ -547,7 +549,7 @@ export class GameState {
         gs.currentNode.whitePrisoners += group.length;
         gs.whitePrisoners += group.length;
       }
-      jq4gv.each(group, function(i,item){
+      jQuery.each(group, function(i,item){
         var x = item[0], y = item[1], moveNumber = gs.moveNumbers[jsGameViewer.getId(x,y)];
         // x, y, color of the dead stone, the move number of the dead stone, the move number that the stone is marked dead
         var p = [x, y, group.color, moveNumber, gs.currentNode.moveNumber];
@@ -593,7 +595,7 @@ export class GameState {
     node.processed = true;
     switch(node.type){
     case NODE_EMPTY: // add/remove stones only
-      jq4gv.each(node.points, function(i,point){
+      jQuery.each(node.points, function(i,point){
         var x = point.x, y = point.y, color = point.color;
         if (x < 0 || x >= board.size || y < 0 || y >= board.size)
           return;
@@ -833,7 +835,7 @@ export class GameState {
     this.whitePrisoners = 0;
     this.whitePrisonerPoints = [];
     var board = this.board;
-    jq4gv.each(this.currentNode.points, function(i,point){
+    jQuery.each(this.currentNode.points, function(i,point){
       board[point.x][point.y] = point.color;
     });
   }

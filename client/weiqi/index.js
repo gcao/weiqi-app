@@ -1,5 +1,7 @@
 'use strict';
 
+var jQuery = require('../lib/jquery');
+
 import './translations';
 
 export default {
@@ -56,7 +58,7 @@ export default {
 
   // return true if obj is String and not empty
   notNull: function(obj){
-    return obj != undefined && obj != null && jq4gv.trim(obj).length > 0;
+    return obj != undefined && obj != null && jQuery.trim(obj).length > 0;
   },
 
   getId: function(x, y){
