@@ -15,7 +15,7 @@ class App extends RouterMixin {
 
     return (
       <body>
-        <WeiqiBoard/>
+        <WeiqiBoard url="/games/luo.sgf"/>
       </body>
     );
   }

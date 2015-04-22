@@ -1,6 +1,6 @@
 'use strict';
 
-import Weiqi from '..';
+import Weiqi from '.';
 import * as models from './models';
 
 var CHAR_A_CODE         = 97;
@@ -29,213 +29,214 @@ var MARK_TERR_WHITE     = 7;
 
 var GM_DAOQI            = "10";
 
-export class SGFParser {
+/**
+ *  Calculate the minimum of the given three values
+ *
+ *@param  n1  First number
+ *@param  n2  Second number
+ *@param  n3  Third number
+ *@return     Smallest of the given three numbers
+ */
+function minPos(n1, n2, n3) {
+  var min;
 
-	function initialize(gameType){
+  if (n1 != -1)
+      min = n1;
+  else if (n2 != -1)
+      min = n2;
+  else
+      min = n3;
+
+  if (n1 < min && n1 != -1)
+      min = n1;
+
+  if (n2 < min && n2 != -1)
+      min = n2;
+
+  if (n3 < min && n3 != -1)
+      min = n3;
+
+  return min;
+}
+
+/**
+ *  Find next character that is not a whitespace, CR or tab
+ *
+ *@param  input  Parsed string
+ *@param  i        Current position
+ *@return          Found position
+ */
+function nextNonSpace(input, i) {
+  var c;
+  while(true){
+    c = input.charAt(i);
+    if (c == ' ' || c == '\t' || c == '\n' || c == '\r')
+      i++;
+    else
+      break;
+  }
+
+  return i;
+}
+
+function createErrorMsg(input, pos, e){
+  var s = "SGFParser: ";
+  if (pos > 0)
+    s += input.substring(0,pos-1);
+  s += "{PARSING FAILED HERE: ";
+
+  if (e != undefined && e != null)
+    s += e;
+
+  s += "}";
+  if (pos < input.length)
+    s += input.substring(pos);
+  return s;
+}
+
+/**
+ *  Parse a string for a SGF property
+ *
+ *@param  toParse  String to parse
+ *@param  prop     Property to search
+ *@return          Value of found property. If not found, empty string ("")
+ *                 is returned
+ */
+function parseProperty(input, prop) {
+  var pos;
+  var inputLength = input.length;
+  var result = "";
+
+  pos = input.indexOf(prop + "[");
+  if (pos == -1)
+    return result;
+  pos += 2;
+
+  if (input.charAt(pos) != '[') {
+    throw createErrorMsg(input, pos);
+  }
+
+  while (input.charAt(++pos) != ']' && pos < inputLength)
+    result += input.charAt(pos);
+
+  if (pos > inputLength) {
+    throw createErrorMsg(input, pos);
+  }
+
+  return result;
+}
+
+export default class SGFParser {
+
+	constructor(gameType){
 		this.gameType = gameType;
 	}
 
-	/**
-	 *  Calculate the minimum of the given three values
-	 *
-	 *@param  n1  First number
-	 *@param  n2  Second number
-	 *@param  n3  Third number
-	 *@return     Smallest of the given three numbers
-	 */
-	function minPos(n1, n2, n3) {
-		var min;
+  /**
+   *  Read header properties and values from sgf file
+   *
+   *@param  input  String with sgf file text
+   *@return        True if successful, else false
+   */
+  initGame(input) {
+    var game = new models.Game(this.gameType);
 
-		if (n1 != -1)
-		    min = n1;
-		else if (n2 != -1)
-		    min = n2;
-		else
-		    min = n3;
+    // Game Type
+    tmp = parseProperty(input, "GM");
+    if (tmp.length > 0 && GM_DAOQI == tmp)
+      game.type = DAOQI;
 
-		if (n1 < min && n1 != -1)
-		    min = n1;
+    // Board size
+    var tmp = parseProperty(input, "SZ");
+    if (tmp.length > 0) {
+      try {
+        game.boardSize = parseInt(tmp);
+      } catch(e){
+        throw createErrorMsg(input, input.indexOf("SZ["));
+      }
+    }
 
-		if (n2 < min && n2 != -1)
-		    min = n2;
+    // Game Name
+    tmp = parseProperty(input, "GN");
+    if (tmp.length > 0)
+      game.name = tmp;
 
-		if (n3 < min && n3 != -1)
-		    min = n3;
+    // Charset
+    tmp = parseProperty(input, "CA");
+    if (tmp.length > 0)
+      game.charset = tmp;
 
-		return min;
-	}
+    // White player name
+    tmp = parseProperty(input, "PW");
+    if (tmp.length > 0)
+      game.whiteName = tmp;
 
-	/**
-	 *  Find next character that is not a whitespace, CR or tab
-	 *
-	 *@param  input  Parsed string
-	 *@param  i        Current position
-	 *@return          Found position
-	 */
-	function nextNonSpace(input, i) {
-		while(true){
-			c = input.charAt(i);
-			if (c == ' ' || c == '\t' || c == '\n' || c == '\r')
-				i++;
-			else
-				break;
-		}
+    // White player rank
+    tmp = parseProperty(input, "WR");
+    if (tmp.length > 0)
+      game.whiteRank = tmp;
 
-		return i;
-	}
+    // Black player name
+    tmp = parseProperty(input, "PB");
+    if (tmp.length > 0)
+      game.blackName = tmp;
 
-	function createErrorMsg(input, pos, e){
-		var s = "SGFParser: ";
-		if (pos > 0)
-			s += input.substring(0,pos-1);
-		s += "{PARSING FAILED HERE: ";
+    // Black player rank
+    tmp = parseProperty(input, "BR");
+    if (tmp.length > 0)
+      game.blackRank = tmp;
 
-		if (e != undefined && e != null)
-			s += e;
+    // Rule
+    tmp = parseProperty(input, "RU");
+    if (tmp.length > 0)
+      game.rule = tmp;
 
-    s += "}";
-		if (pos < input.length)
-			s += input.substring(pos);
-		return s;
-	}
+    // Komi
+    tmp = parseProperty(input, "KM");
+    if (tmp.length > 0) {
+      try {
+        game.komi = parseFloat(tmp);
+      } catch(e){
+        throw createErrorMsg(input, input.indexOf("KM["));
+      }
+    }
 
-	/**
-	 *  Parse a string for a SGF property
-	 *
-	 *@param  toParse  String to parse
-	 *@param  prop     Property to search
-	 *@return          Value of found property. If not found, empty string ("")
-	 *                 is returned
-	 */
-	function parseProperty(input, prop) {
-		var pos;
-		var inputLength = input.length;
-		var result = "";
+    // Handicap
+    tmp = parseProperty(input, "HA");
+    if (tmp.length > 0) {
+      try {
+        game.handicap = parseInt(tmp);
+      } catch(e){
+        throw createErrorMsg(input, input.indexOf("HA["));
+      }
+    }
 
-		pos = input.indexOf(prop + "[");
-		if (pos == -1)
-			return result;
-		pos += 2;
+    // Result
+    tmp = parseProperty(input, "RE");
+    if (tmp.length > 0)
+      game.result = tmp;
 
-		if (input.charAt(pos) != '[') {
-			throw createErrorMsg(input, pos);
-		}
+    // Date
+    tmp = parseProperty(input, "DT");
+    if (tmp.length > 0)
+      game.date = tmp;
 
-		while (input.charAt(++pos) != ']' && pos < inputLength)
-			result += input.charAt(pos);
+    // Place
+    tmp = parseProperty(input, "PC");
+    if (tmp.length > 0)
+      game.place = tmp;
 
-		if (pos > inputLength) {
-			throw createErrorMsg(input, pos);
-		}
+    return game;
+  }
 
-		return result;
-	}
-
-	/**
-	 *  Read header properties and values from sgf file
-	 *
-	 *@param  input  String with sgf file text
-	 *@return        True if successful, else false
-	 */
-	function initGame(input) {
-		var game = new models.Game(this.gameType);
-
-		// Game Type
-		tmp = parseProperty(input, "GM");
-		if (tmp.length > 0 && GM_DAOQI == tmp)
-			game.type = DAOQI;
-
-		// Board size
-		var tmp = parseProperty(input, "SZ");
-		if (tmp.length > 0) {
-			try {
-				game.boardSize = parseInt(tmp);
-			} catch(e){
-				throw createErrorMsg(input, input.indexOf("SZ["));
-			}
-		}
-
-		// Game Name
-		tmp = parseProperty(input, "GN");
-		if (tmp.length > 0)
-			game.name = tmp;
-
-		// Charset
-		tmp = parseProperty(input, "CA");
-		if (tmp.length > 0)
-			game.charset = tmp;
-
-		// White player name
-		tmp = parseProperty(input, "PW");
-		if (tmp.length > 0)
-			game.whiteName = tmp;
-
-		// White player rank
-		tmp = parseProperty(input, "WR");
-		if (tmp.length > 0)
-			game.whiteRank = tmp;
-
-		// Black player name
-		tmp = parseProperty(input, "PB");
-		if (tmp.length > 0)
-			game.blackName = tmp;
-
-		// Black player rank
-		tmp = parseProperty(input, "BR");
-		if (tmp.length > 0)
-			game.blackRank = tmp;
-
-		// Rule
-		tmp = parseProperty(input, "RU");
-		if (tmp.length > 0)
-			game.rule = tmp;
-
-		// Komi
-		tmp = parseProperty(input, "KM");
-		if (tmp.length > 0) {
-			try {
-				game.komi = parseFloat(tmp);
-			} catch(e){
-				throw createErrorMsg(input, input.indexOf("KM["));
-			}
-		}
-
-		// Handicap
-		tmp = parseProperty(input, "HA");
-		if (tmp.length > 0) {
-			try {
-				game.handicap = parseInt(tmp);
-			} catch(e){
-				throw createErrorMsg(input, input.indexOf("HA["));
-			}
-		}
-
-		// Result
-		tmp = parseProperty(input, "RE");
-		if (tmp.length > 0)
-			game.result = tmp;
-
-		// Date
-		tmp = parseProperty(input, "DT");
-		if (tmp.length > 0)
-			game.date = tmp;
-
-		// Place
-		tmp = parseProperty(input, "PC");
-		if (tmp.length > 0)
-			game.place = tmp;
-
-		return game;
-	}
-
-	function parse(input){
+	parse(input){
 		var pos = 0;
-		try {
+		//try {
 			// escape HTML entities
 			input = input.replace(/&/g,"&amp;");
 			input = input.replace(/</g,"&lt;");
 			// parse general properties and init a game
-			var game = initGame(input);
+			var game = this.initGame(input);
 			var inputLength = input.length;
 			var state = STATE_VAR_BEGIN;
 			var pos = 0;
@@ -254,6 +255,7 @@ export class SGFParser {
 			var markText = "";
 			var currentNode = game.rootNode;
 			var nodeStack = new Array();
+      var oldLabel = false;
 
 			do {
 				//{{{ Check states
@@ -573,13 +575,9 @@ export class SGFParser {
 				currentNode.parent.children.pop();
 			}
 			return game;
-		} catch(e) {
-			throw createErrorMsg(input,pos,e);
-		}
+		//} catch(e) {
+		//  throw createErrorMsg(input,pos,e);
+		//}
 	}
 
-  return {
-    initialize: initialize,
-    parse: parse
-  }
 }

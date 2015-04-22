@@ -1,3 +1,5 @@
+var jq4gv = require('../../lib/jquery');
+
 import Weiqi from '..';
 
 export const STONE_NONE      = 0;
@@ -64,6 +66,7 @@ export class Point {
  */
 export class Board extends Array {
   constructor(gameType, size){
+    super();
     this.gameType = gameType;
     this.size = size;
     this.reset();
@@ -96,7 +99,7 @@ export class Board extends Array {
   reset(){
     for(var i=0; i<this.size; i++) {
       this[i] = new Array(this.size);
-      for(j=0; j<this.size; j++)
+      for(var j=0; j<this.size; j++)
         this[i][j] = 0;
     }
   }
@@ -301,7 +304,7 @@ export class Node {
       if (node.x == x && node.y == y) return i;
     }
     return null;
-  },
+  }
 
   isOnBranch(){
     return this.depth > 1;
