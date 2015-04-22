@@ -13,7 +13,7 @@ var sassPaths = [
 module.exports = {
   context: __dirname + '/client',
   entry: {
-    main: "./components/app.jsx",
+    main: "./components/App.jsx",
     vendors: ['react', 'page', 'js-csp']
   },
 

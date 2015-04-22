@@ -4,7 +4,7 @@ var React = require('react');
 
 import * as models from '../weiqi/models';
 
-export default class Banner extends React.Component {
+export default class extends React.Component {
   render() {
     var moveNumber = 0;
     var totalMoves = 0;

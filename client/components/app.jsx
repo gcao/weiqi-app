@@ -7,7 +7,7 @@ var pageRoutes = require('../routes');
 
 import WeiqiBoard from './WeiqiBoard';
 
-require('../stylesheets/app.scss');
+require('../stylesheets/App.scss');
 
 class App extends RouterMixin {
   render() {

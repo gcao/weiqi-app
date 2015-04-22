@@ -1,17 +1,18 @@
 'use strict';
 
 var jQuery = require('../lib/jquery');
-var React = require('react');
+var React  = require('react');
 
-import Weiqi from '../weiqi';
+import Weiqi       from '../weiqi';
 import * as models from '../weiqi/models';
-import SGFParser from '../weiqi/SGFParser';
+import SGFParser   from '../weiqi/SGFParser';
 
-import Banner from './Banner';
+import Banner      from './Banner';
+import Board       from './Board';
 
 require('../stylesheets/WeiqiBoard.css');
 
-export default class WeiqiBoard extends React.Component {
+export default class extends React.Component {
   getInitialState() {
   }
 
@@ -35,6 +36,7 @@ export default class WeiqiBoard extends React.Component {
     return (
       <div className='gvreset gameviewer'>
         <Banner ctx={this}/>
+        <Board ctx={this}/>
       </div>
     );
   }
