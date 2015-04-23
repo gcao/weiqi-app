@@ -1,8 +1,7 @@
 'use strict';
 
-var jQuery = require('../../lib/jquery');
-
-import Weiqi from '..';
+import jQuery from '../../lib/jquery';
+import Weiqi  from '..';
 
 export const STONE_NONE      = 0;
 export const STONE_BLACK     = 1;
@@ -75,7 +74,7 @@ export class Board extends Array {
   }
 
   isNeighbor(x1,y1,x2,y2){
-    if (this.gameType == jsGameViewer.DAOQI){
+    if (this.gameType == Weiqi.DAOQI){
       if (x1 == x2)
         return y1 == (y2+1)%this.size || y1 == (y2-1+this.size)%this.size;
       if (y1 == y2)
@@ -126,7 +125,7 @@ export class Board extends Array {
    * ...
    */
   getDeadGroup(x, y){
-    if (this.gameType == jsGameViewer.DAOQI){
+    if (this.gameType == Weiqi.DAOQI){
       x = this.normalize(x);
       y = this.normalize(y);
     } else {
@@ -137,7 +136,7 @@ export class Board extends Array {
     if (this[x][y] == 0)
       return null;
 
-    if (this.gameType == jsGameViewer.DAOQI){
+    if (this.gameType == Weiqi.DAOQI){
       if (this[this.normalize(x-1)][y] == 0 ||
         this[this.normalize(x+1)][y] == 0 ||
         this[x][this.normalize(y-1)] == 0 ||
@@ -158,7 +157,7 @@ export class Board extends Array {
     group.push([x,y]);
     group[x+"-"+y] = true;
 
-    if (this.gameType == jsGameViewer.DAOQI){
+    if (this.gameType == Weiqi.DAOQI){
       if (this.expandDeadGroup(group, x-1, y))
         return null;
       if (this.expandDeadGroup(group, x+1, y))
@@ -195,7 +194,7 @@ export class Board extends Array {
    *        false - the group has no liberty after checking x,y
    */
   expandDeadGroup(group, x, y){
-    if (this.gameType == jsGameViewer.DAOQI){
+    if (this.gameType == Weiqi.DAOQI){
       x = this.normalize(x);
       y = this.normalize(y);
     }
@@ -204,7 +203,7 @@ export class Board extends Array {
     if (this[x][y] != group.color)
       return false;
 
-    if (this.gameType == jsGameViewer.DAOQI){
+    if (this.gameType == Weiqi.DAOQI){
       if (this[this.normalize(x-1)][y] == 0 ||
         this[this.normalize(x+1)][y] == 0 ||
         this[x][this.normalize(y-1)] == 0 ||
@@ -223,7 +222,7 @@ export class Board extends Array {
     group.push([x,y]);
     group[x+"-"+y] = true;
 
-    if (this.gameType == jsGameViewer.DAOQI){
+    if (this.gameType == Weiqi.DAOQI){
       if (this.expandDeadGroup(group, x-1, y))
         return true;
       if (this.expandDeadGroup(group, x+1, y))
@@ -529,7 +528,7 @@ export class GameState {
   }
 
   getMoveNumber(x,y){
-    var m = this.moveNumbers[jsGameViewer.getId(x,y)];
+    var m = this.moveNumbers[Weiqi.getId(x,y)];
     if (m instanceof Number)
       return m;
     if (m != undefined && m != null)
@@ -550,7 +549,7 @@ export class GameState {
         gs.whitePrisoners += group.length;
       }
       jQuery.each(group, function(i,item){
-        var x = item[0], y = item[1], moveNumber = gs.moveNumbers[jsGameViewer.getId(x,y)];
+        var x = item[0], y = item[1], moveNumber = gs.moveNumbers[Weiqi.getId(x,y)];
         // x, y, color of the dead stone, the move number of the dead stone, the move number that the stone is marked dead
         var p = [x, y, group.color, moveNumber, gs.currentNode.moveNumber];
         if (group.color == STONE_BLACK){
@@ -563,7 +562,7 @@ export class GameState {
         gs.board[x][y] = 0;
         var point = new Point(x, y, group.color, moveNumber, true);
         gs.currentNode.points.push(point);
-        delete gs.moveNumbers[jsGameViewer.getId(x, y)];
+        delete gs.moveNumbers[Weiqi.getId(x, y)];
       });
     }
   }
@@ -580,7 +579,7 @@ export class GameState {
           board[point.x][point.y] = 0;
         else
           board[point.x][point.y] = point.color;
-        this.moveNumbers[jsGameViewer.getId(point.x,point.y)] = point.moveNumber;
+        this.moveNumbers[Weiqi.getId(point.x,point.y)] = point.moveNumber;
       }
       if (node.blackPrisoners > 0) {
         this.blackPrisoners += node.blackPrisoners;
@@ -603,7 +602,7 @@ export class GameState {
         case STONE_ERASE:
           point.color = board[x][y];
           point.deleteFlag = true;
-          var p = [x,y,point.color,gs.moveNumbers[jsGameViewer.getId(x,y)],node.moveNumber];
+          var p = [x,y,point.color,gs.moveNumbers[Weiqi.getId(x,y)],node.moveNumber];
           if (point.color == STONE_BLACK){
             node.blackPrisoners ++;
             gs.blackPrisoners ++;
@@ -630,11 +629,11 @@ export class GameState {
         throw "Invalid point: ("+x+","+y+")";
       board[x][y] = color;
       var moveNumber = new MoveNumber(node.moveNumber,node.depth);
-      gs.moveNumbers[jsGameViewer.getId(x,y)] = moveNumber;
+      gs.moveNumbers[Weiqi.getId(x,y)] = moveNumber;
       var point = new Point(x,y,color,moveNumber);
       node.points.push(point);
       var opponentColor = (color==STONE_BLACK)?STONE_WHITE:STONE_BLACK;
-      if (gs.game.type == jsGameViewer.DAOQI){
+      if (gs.game.type == Weiqi.DAOQI){
         var x1 = board.normalize(x-1);
         var y1 = y;
         if (board[x1][y1] == opponentColor)
@@ -684,12 +683,12 @@ export class GameState {
         // copy state to this.last
         gs.last = new Object();
         gs.last.node = node;
-        gs.last.board = jsGameViewer.clone(board);
-        gs.last.moveNumbers = jsGameViewer.clone(this.moveNumbers);
+        gs.last.board = Weiqi.clone(board);
+        gs.last.moveNumbers = Weiqi.clone(this.moveNumbers);
         gs.last.blackPrisoners = this.blackPrisoners;
-        gs.last.blackPrisonerPoints = jsGameViewer.clone(this.blackPrisonerPoints);
+        gs.last.blackPrisonerPoints = Weiqi.clone(this.blackPrisonerPoints);
         gs.last.whitePrisoners = this.whitePrisoners;
-        gs.last.whitePrisonerPoints = jsGameViewer.clone(this.whitePrisonerPoints);
+        gs.last.whitePrisonerPoints = Weiqi.clone(this.whitePrisonerPoints);
       }
     }
   }
@@ -802,10 +801,10 @@ export class GameState {
       var point = this.currentNode.points[i];
       if (point.deleteFlag){
         this.board[point.x][point.y] = point.color;
-        this.moveNumbers[jsGameViewer.getId(point.x,point.y)] = point.moveNumber;
+        this.moveNumbers[Weiqi.getId(point.x,point.y)] = point.moveNumber;
       } else {
         this.board[point.x][point.y] = STONE_NONE;
-        delete this.moveNumbers[jsGameViewer.getId(point.x,point.y)];
+        delete this.moveNumbers[Weiqi.getId(point.x,point.y)];
       }
     }
     if (this.currentNode.blackPrisoners > 0) {
@@ -855,11 +854,11 @@ export class GameState {
     } else {
       this.currentNode = this.last.node;
       this.board.copyFrom(this.last.board);
-      this.moveNumbers = jsGameViewer.clone(this.last.moveNumbers);
+      this.moveNumbers = Weiqi.clone(this.last.moveNumbers);
       this.blackPrisoners = this.last.blackPrisoners;
-      this.blackPrisonerPoints = jsGameViewer.clone(this.last.blackPrisonerPoints);
+      this.blackPrisonerPoints = Weiqi.clone(this.last.blackPrisonerPoints);
       this.whitePrisoners = this.last.whitePrisoners;
-      this.whitePrisonerPoints = jsGameViewer.clone(this.last.whitePrisonerPoints);
+      this.whitePrisonerPoints = Weiqi.clone(this.last.whitePrisonerPoints);
     }
   }
 

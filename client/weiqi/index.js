@@ -1,7 +1,6 @@
 'use strict';
 
-var jQuery = require('../lib/jquery');
-
+import jQuery from '../lib/jquery';
 import './translations';
 
 export default {

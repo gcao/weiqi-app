@@ -1,7 +1,6 @@
 'use strict';
 
-var React = require('react');
-
+import React       from 'react';
 import * as models from '../weiqi/models';
 
 export default class extends React.Component {

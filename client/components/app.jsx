@@ -1,11 +1,9 @@
 'use strict'
 
-var React = require('react');
-var {RouterMixin, Transition} = require('../router');
-
-var pageRoutes = require('../routes');
-
-import WeiqiBoard from './WeiqiBoard';
+import React                     from 'react';
+import {RouterMixin, Transition} from '../router';
+import routes                    from '../routes';
+import WeiqiBoard                from './WeiqiBoard';
 
 require('../stylesheets/App.scss');
 
@@ -15,13 +13,45 @@ class App extends RouterMixin {
 
     return (
       <body>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
         <WeiqiBoard url="/games/luo.sgf"/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       </body>
     );
   }
 
   componentWillMount(){
-    this.initRouter(pageRoutes);
+    this.initRouter(routes);
   }
 }
 

@@ -1,7 +1,6 @@
 'use strict';
 
-var React = require('react');
-
+import React       from 'react';
 import Stones      from './Stones';
 import Marks       from './Marks';
 import BranchMarks from './BranchMarks';

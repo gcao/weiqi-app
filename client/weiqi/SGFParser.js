@@ -1,6 +1,6 @@
 'use strict';
 
-import Weiqi from '.';
+import Weiqi       from '.';
 import * as models from './models';
 
 var CHAR_A_CODE         = 97;
