@@ -1,12 +1,11 @@
 'use strict';
 
-//var React = require('react');
-import React from 'react';
-
+import React       from 'react';
 import * as models from '../weiqi/models';
+import {xyToArea}  from './utils';
 
-export default class extends React.Component {
-  render() {
+export default React.createClass({
+  render: function() {
     var x = this.props.x, y = this.props.y, color = this.props.color;
     var gridSize = 21;
     var boardColor = "#EECD7A";
@@ -29,5 +28,6 @@ export default class extends React.Component {
       </div>
     );
   }
-}
+
+});
 

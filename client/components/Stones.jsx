@@ -1,17 +1,14 @@
 'use strict';
 
-var React = require('react');
-
+import React       from 'react';
 import * as models from '../weiqi/models';
-import PlaceHolder from './PlaceHolder';
+import Stone       from './Stone';
 
-export default class extends React.Component {
-  render() {
+export default React.createClass({
+  render: function() {
     var gameState = this.props.gameState;
-    if (!gameState) return PlaceHolder;
-
-    var board = gameState.board;
-    var stones = [];
+    var board     = gameState.board;
+    var stones    = [];
     for(var i=0; i<board.size; i++) {
       for (var j=0; j<board.size; j++) {
         var color = board[i][j];
@@ -27,5 +24,6 @@ export default class extends React.Component {
       <div className='gvreset gvboard-overlay'>{stones}</div>
     );
   }
-}
+
+});
 

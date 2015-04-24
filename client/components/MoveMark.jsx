@@ -2,12 +2,13 @@
 
 import React from 'react';
 
-export default class extends React.Component {
-  render() {
+export default React.createClass({
+  render: function() {
     return (
       <div>
       </div>
     );
   }
-}
+
+});
 

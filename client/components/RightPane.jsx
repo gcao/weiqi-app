@@ -4,17 +4,15 @@ import React    from 'react';
 import Info     from './Info';
 import Comments from './Comments';
 
-export default class extends React.Component {
-  render() {
-    if (!this.props.gameState)
-      return (<div className='gvreset gvright-pane'></div>);
-
+export default React.createClass({
+  render: function() {
     return (
       <div className='gvreset gvright-pane'>
-        <Info ref="info" game={this.props.game}/>
-        <Comments ref="comment" ctx={this.props.ctx}/>
+        <Info ref="info" game={this.props.gameState.game}/>
+        <Comments ref="comment" node={this.props.gameState.currentNode}/>
       </div>
     );
   }
-}
+
+});
 

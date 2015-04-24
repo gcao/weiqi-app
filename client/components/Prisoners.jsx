@@ -1,22 +1,23 @@
 'use strict';
 
 import React       from 'react';
+import Prisoner    from './Prisoner';
 import PlaceHolder from './PlaceHolder';
 
-export default class extends React.Component {
-  render() {
-    var prisoners = [];
+export default React.createClass({
+  render: function() {
+    var children = [];
     if (this.props.showBlackPrisoners) {
-      var blackPrisoners = this.props.gameState.blackPrisonerPoints;
+      var blackPrisoners = this.props.blackPrisoners;
       for (var i=0; i<blackPrisoners.length; i++) {
         var prisoner = blackPrisoners[i];
-        prisoners.push(<Prisoner x={prisoner[0]} y={prisoner[1]} color={prisoner[2]}/>);
+        children.push(<Prisoner x={prisoner[0]} y={prisoner[1]} color={prisoner[2]}/>);
       }
     } else if (this.props.showWhitePrisoners) {
-      var whitePrisoners = this.props.gameState.whitePrisonerPoints;
+      var whitePrisoners = this.props.whitePrisoners;
       for (var i=0; i<whitePrisoners.length; i++) {
         var prisoner = whitePrisoners[i];
-        prisoners.push(<Prisoner x={prisoner[0]} y={prisoner[1]} color={prisoner[2]}/>);
+        children.push(<Prisoner x={prisoner[0]} y={prisoner[1]} color={prisoner[2]}/>);
       }
     } else {
       return PlaceHolder;
@@ -24,9 +25,10 @@ export default class extends React.Component {
 
     return (
       <div className='gvreset gvboard-overlay'>
-        {prisoners}
+        {children}
       </div>
     );
   }
-}
+
+});
 

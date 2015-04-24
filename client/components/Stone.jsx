@@ -2,9 +2,10 @@
 
 import React       from 'react';
 import * as models from '../weiqi/models';
+import {xyToArea}  from './utils';
 
-export default class Stones extends React.Component {
-  render() {
+export default React.createClass({
+  render: function() {
     var x = this.props.x;
     var y = this.props.y;
     var color = this.props.color;
@@ -42,5 +43,6 @@ export default class Stones extends React.Component {
       </div>
     );
   }
-}
+
+});
 

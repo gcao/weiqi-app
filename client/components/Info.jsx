@@ -4,11 +4,9 @@ import React       from 'react';
 import Weiqi       from '../weiqi';
 import * as models from '../weiqi/models';
 
-export default class extends React.Component {
-  render() {
+export default React.createClass({
+  render: function() {
     var game = this.props.game;
-
-    if (!game) return EMPTY_DIV;
 
     var playFirst = "\u00a0&#8592; " + jsgvTranslations['play_first'];
 
@@ -43,5 +41,6 @@ export default class extends React.Component {
       </div>
     );
   }
-}
+
+});
 

@@ -7,17 +7,25 @@ import BranchMarks from './BranchMarks';
 import MoveMark    from './MoveMark';
 import Prisoners   from './Prisoners';
 
-export default class extends React.Component {
-  render() {
+export default React.createClass({
+  render: function() {
+    var blackPrisoners = this.props.gameState.blackPrisonerPoints;
+    var whitePrisoners = this.props.gameState.whitePrisonerPoints;
+
     return (
       <div className='gvreset gvboard-outer gvsprite-21-board'>
         <div className='gvreset gvboard'
         >
-          <Stones ctx={this.props.ctx}/>
-          <Marks ctx={this.props.ctx}/>
+          <Stones gameState={this.props.gameState}/>
+          <Marks  gameState={this.props.gameState}/>
           <BranchMarks ctx={this.props.ctx}/>
           <MoveMark ctx={this.props.ctx}/>
-          <Prisoners ctx={this.props.ctx}/>
+          <Prisoners
+            showBlackPrisoners={this.props.config.showBlackPrisoners}
+            showWhitePrisoners={this.props.config.showWhitePrisoners}
+            blackPrisoners={blackPrisoners}
+            whitePrisoners={whitePrisoners}
+          />
           <div className='gvreset gvboard-overlay gvboard-fascade'
           >
             <div className='gvreset gvsprite-21-blankboard'/>
@@ -26,5 +34,5 @@ export default class extends React.Component {
       </div>
     );
   }
-}
+});
 

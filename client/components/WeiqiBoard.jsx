@@ -1,236 +1,227 @@
 'use strict';
 
-import jQuery      from '../lib/jquery';
-import React       from 'react';
-import Weiqi       from '../weiqi';
-import * as models from '../weiqi/models';
-import SGFParser   from '../weiqi/SGFParser';
-import Banner      from './Banner';
-import Board       from './Board';
-import Toolbar     from './Toolbar';
-import RightPane   from './RightPane';
+import jQuery           from '../lib/jquery';
+import React            from 'react';
+import Weiqi            from '../weiqi';
+import * as models      from '../weiqi/models';
+import SGFParser        from '../weiqi/SGFParser';
+import Banner           from './Banner';
+import Board            from './Board';
+import Toolbar          from './Toolbar';
+import RightPane        from './RightPane';
+import CustomEventMixin from './CustomEventMixin';
 
 require('../stylesheets/WeiqiBoard.css');
 
-export default class extends React.Component {
-  componentWillMount() {
+export default React.createClass({
+  mixins: [CustomEventMixin],
+
+  getInitialState: function() {
+    var config = {
+      verticalLayout     : false,
+      gridSize           : 21,
+      fastMode           : 10,
+      showMoveNumber     : false,
+      activeBackground   : "#EECD7A",
+      inactiveBackground : "#CCAB69",
+      boardColor         : "#EECD7A",
+      rightPaneHeight    : 446
+    };
+    var game      = new models.Game();
+    var gameState = new models.GameState(game);
+    return {
+      config      : config,
+      gameState   : gameState
+    };
+  },
+
+  componentWillMount: function() {
     var self = this;
 
     // Load game
     jQuery.ajax({
-      url:this.props.url,
-      success:function(response){
-        var game = new SGFParser(Weiqi.WEIQI).parse(response);
-        self.setState({
-          game: game,
-          gameState: new models.GameState(game)
-        });
-        self.forwardAll();
+      url     : self.props.url,
+      success : function(response){
+        var game      = new SGFParser(Weiqi.WEIQI).parse(response);
+        var gameState = new models.GameState(game);
+        gameState.forwardAll();
+        self.setState({gameState: gameState});
       }
     });
-  }
+  },
 
-  changeLocale(newLocale) {
-    if (this.config.locale === newLocale)
-      return;
+  customEvents: {
+    changeLocale: function(newLocale) {
+      if (this.state.config.locale === newLocale)
+        return;
 
-    if (!Weiqi.LOCALES.indexOf(newLocale) < 0){
-      alert("WeiqiBoard WARNING: Invalid locale '" + newLocale + "'");
-      return;
+      if (!Weiqi.LOCALES.indexOf(newLocale) < 0){
+        alert("WeiqiBoard WARNING: Invalid locale '" + newLocale + "'");
+        return;
+      }
+
+      this.state.config.locale = newLocale;
+      window.jsgvTranslations = window["jsgv_" + newLocale];
+      this.triggerRender()();
+    },
+
+    toggleBlackPrisoners: function(event) {
+      this.state.config.showBlackPrisoners = !!event.detail;
+      this.triggerRender();
+    },
+
+    toggleWhitePrisoners: function(event) {
+      this.state.config.showWhitePrisoners = !!event.detail;
+      this.triggerRender();
+    },
+
+    forward: function(){
+      if (this.state.gameState.forward())
+        this.triggerRender();
+    },
+
+    forwardN: function(){
+      var changed = false;
+      for(var i=0; i<this.state.config.fastMode; i++){
+        if (!this.state.gameState.forward())
+          break;
+        changed = true;
+      }
+      if (changed)
+        this.triggerRender();
+    },
+
+    forwardToComment: function(){
+      var changed = false;
+      for(;;){
+        if (!this.state.gameState.forward())
+          break;
+        changed = true;
+        // stop at move that has comments or branches
+        var node = this.state.gameState.currentNode;
+        if (node.hasComment() || node.hasBranches())
+          break;
+      }
+      if (changed)
+        this.triggerRender();
+    },
+
+    forwardAll: function(){
+      if (!this.state.gameState.isLast()) {
+        this.state.gameState.forwardAll();
+        this.triggerRender();
+      }
+    },
+
+    back: function(){
+      if (this.state.gameState.back())
+        this.triggerRender();
+    },
+
+    backN: function(){
+      var changed = false;
+      for(var i=0; i<this.state.config.fastMode; i++){
+        if (!this.state.gameState.back())
+          break;
+        changed = true;
+      }
+      if (changed)
+        this.triggerRender();
+    },
+
+    backToComment: function(){
+      var changed = false;
+      for(;;){
+        if (!this.state.gameState.back())
+          break;
+        changed = true;
+        // stop at move that has comments or branches
+        var node = this.state.gameState.currentNode;
+        if (node.hasComment() || node.hasBranches())
+          break;
+      }
+      if (changed)
+        this.triggerRender();
+    },
+
+    backAll: function(){
+      if (!this.state.gameState.isFirst()) {
+        this.state.gameState.backAll();
+        this.triggerRender();
+      }
+    },
+
+    goTo: function(n){
+      var s = prompt("Please enter the move number: ");
+      if (!s) return;
+      var n = parseInt(s);
+      if (isNaN(n) || n < 0) {
+        alert("Not a valid move number.");
+        return;
+      }
+
+      var _this = this;
+      while (this.state.gameState.isOnBranch()){
+        this.back();
+      }
+      if (n >= this.state.gameState.game.getMoves()){
+        this.forwardAll();
+      } else if (n <= 0) {
+        this.backAll();
+      } else if (n > this.state.gameState.currentNode.moveNumber) {
+        var changed = false;
+        while(n > this.state.gameState.currentNode.moveNumber){
+          if (!this.state.gameState.forward())
+            break;
+          changed = true;
+        }
+        if (changed)
+          this.triggerRender();
+      } else if (n < this.state.gameState.currentNode.moveNumber) {
+        var changed = false;
+        while(n < this.state.gameState.currentNode.moveNumber){
+          if (!this.state.gameState.back())
+            break;
+          changed = true;
+        }
+        if (changed)
+          this.triggerRender();
+      }
+    },
+
+    goToBranch: function(n){
+      if (this.state.gameState.goToBranch(n))
+        this.triggerRender();
     }
 
-    this.config.locale = newLocale;
-    window.jsgvTranslations = window["jsgv_" + newLocale];
-    this.render();
-  }
+  },
 
-  changeLocaleToEnglish() {
-    this.changeLocale('en_us');
-  }
-
-  changeLocaleToChinese() {
-    this.changeLocale('zh_cn');
-  }
-
-  setShowBlackPrisoners(flag) {
-    if (this.showBlackPrisoners !== flag) {
-      this.showBlackPrisoners = flag;
-      this.render();
-    }
-  }
-
-  setShowWhitePrisoners(flag) {
-    if (this.showWhitePrisoners !== flag) {
-      this.showWhitePrisoners = flag;
-      this.render();
-    }
-  }
-
-  setMousePosition(x, y) {
+  setMousePosition: function(x, y) {
     this.mouseX = x;
     this.mouseY = y;
-    this.render();
-  }
+    this.triggerRender();
+  },
 
-  refresh(){
-    this.refresh();
-  }
+  toggleNumber: function(){
+    this.state.config.showMoveNumber = !this.state.config.showMoveNumber;
+    this.triggerRender();
+  },
 
-  toggleNumber(){
-    this.config.showMoveNumber = !this.config.showMoveNumber;
-    this.render();
-  }
+  triggerRender: function() {
+    this.setState({config: this.state.config});
+  },
 
-  forward(){
-    if (!this.gameState) return;
-
-    if (this.gameState.forward())
-      this.render();
-  }
-
-  forwardN(){
-    if (!this.gameState) return;
-
-    var changed = false;
-    for(var i=0; i<this.config.fastMode; i++){
-      if (!this.gameState.forward())
-        break;
-      changed = true;
-    }
-    if (changed)
-      this.render();
-  }
-
-  forwardToComment(){
-    if (!this.gameState) return;
-
-    var changed = false;
-    for(;;){
-      if (!this.gameState.forward())
-        break;
-      changed = true;
-      // stop at move that has comments or branches
-      var node = this.gameState.currentNode;
-      if (node.hasComment() || node.hasBranches())
-        break;
-    }
-    if (changed)
-      this.render();
-  }
-
-  forwardAll(){
-    if (!this.gameState) return;
-
-    if (!this.gameState.isLast()) {
-      this.gameState.forwardAll();
-      this.render();
-    }
-  }
-
-  back(){
-    if (!this.gameState) return;
-
-    if (this.gameState.back())
-      this.render();
-  }
-
-  backN(){
-    if (!this.gameState) return;
-
-    var changed = false;
-    for(var i=0; i<this.config.fastMode; i++){
-      if (!this.gameState.back())
-        break;
-      changed = true;
-    }
-    if (changed)
-      this.render();
-  }
-
-  backToComment(){
-    if (!this.gameState) return;
-
-    var changed = false;
-    for(;;){
-      if (!this.gameState.back())
-        break;
-      changed = true;
-      // stop at move that has comments or branches
-      var node = this.gameState.currentNode;
-      if (node.hasComment() || node.hasBranches())
-        break;
-    }
-    if (changed)
-      this.render();
-  }
-
-  backAll(){
-    if (!this.gameState) return;
-
-    if (!this.gameState.isFirst()) {
-      this.gameState.backAll();
-      this.render();
-    }
-  }
-
-  goTo(n){
-    if (!this.gameState) return;
-
-    var s = prompt("Please enter the move number: ");
-    if (!s) return;
-    var n = parseInt(s);
-    if (isNaN(n) || n < 0) {
-      alert("Not a valid move number.");
-      return;
-    }
-
-    var _this = this;
-    while (this.gameState.isOnBranch()){
-      this.back();
-    }
-    if (n >= this.gameState.game.getMoves()){
-      this.forwardAll();
-    } else if (n <= 0) {
-      this.backAll();
-    } else if (n > this.gameState.currentNode.moveNumber) {
-      var changed = false;
-      while(n > this.gameState.currentNode.moveNumber){
-        if (!this.gameState.forward())
-          break;
-        changed = true;
-      }
-      if (changed)
-        this.render();
-    } else if (n < this.gameState.currentNode.moveNumber) {
-      var changed = false;
-      while(n < this.gameState.currentNode.moveNumber){
-        if (!this.gameState.back())
-          break;
-        changed = true;
-      }
-      if (changed)
-        this.render();
-    }
-  }
-
-  goToBranch(n){
-    if (this.gameState && this.gameState.goToBranch(n))
-      this.render();
-  }
-
-  render() {
-    var game = this.state ? this.state.game : null;
-    var gameState = this.state ? this.state.gameState : null;
-
+  render: function() {
     return (
       <div className='gvreset gameviewer'>
-        <Banner ctx={this}/>
-        <Board ctx={this}/>
-        <Toolbar ctx={this}/>
+        <Banner gameState={this.state.gameState}/>
+        <Board config={this.state.config} gameState={this.state.gameState}/>
+        <Toolbar config={this.state.config} gameState={this.state.gameState}/>
         <div align='center' className='gvreset gvpoint-label'></div>
-        <RightPane ctx={this} game={game} gameState={gameState}/>
+        <RightPane config={this.state.config} gameState={this.state.gameState}/>
       </div>
     );
   }
 
-}
+});
+

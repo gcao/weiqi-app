@@ -1,10 +1,14 @@
 'use strict';
 
-import React       from 'react';
-import * as models from '../weiqi/models';
+import React            from 'react';
+import Weiqi            from '../weiqi';
+import * as models      from '../weiqi/models';
+import CustomEventMixin from './CustomEventMixin';
 
-export default class extends React.Component {
-  render() {
+export default React.createClass({
+  mixins: [CustomEventMixin],
+
+  render: function() {
     var moveNumber = 0;
     var totalMoves = 0;
     var nextPlayerClass = "gvreset nextPlayerImg";
@@ -28,15 +32,15 @@ export default class extends React.Component {
         <div className='gvreset gvbanner-overlay'></div>
         <div className='gvreset gvbanner-left'>
           {
-            this.props.locale === 'zh_cn'
+            this.props.locale === Weiqi.ZH_CN
             ? '中文'
-            : <a className='gvreset localization'>中文</a>
+            : <a className='gvreset localization' href="javascript:void(0)" onClick={this.customEventTrigger('changeLocale', Weiqi.ZH_CN)}>中文</a>
           }
           &nbsp;|&nbsp;
           {
-            this.props.locale === 'en_us'
+            this.props.locale === Weiqi.EN_US
             ? 'EN'
-            : <a className='gvreset localization'>EN</a>
+            : <a className='gvreset localization' href="javascript:void(0)" onClick={this.customEventTrigger('changeLocale', Weiqi.EN_US)}>EN</a>
           }
           &nbsp;&nbsp;&nbsp;&nbsp;
           {jsgvTranslations['whose_turn']}
@@ -57,8 +61,13 @@ export default class extends React.Component {
           <div className='gvreset gvprisoners-outer'>
             <div className='gvreset gvblack-prisoners-outer'>
               <span className='gvreset gvbutton'>
-                <a href='javascript:void(0)'>
-                  <div className='gvreset gvsprite-15-black_dead' style={{display: 'inline-block', margin: -2, marginRight: 2}} onMouseEnter={this.showBlackPrisoners}/>
+                <a href='javascript:void(0)'
+                   onMouseOver={this.customEventTrigger('toggleBlackPrisoners', true)}
+                   onMouseOut={this.customEventTrigger('toggleBlackPrisoners', false)}
+                >
+                  <div className='gvreset gvsprite-15-black_dead'
+                       style={{display: 'inline-block', margin: -2, marginRight: 2}}>
+                  </div>
                   &nbsp;
                   <span className='gvreset gvcontrol-text' style={{fontWeight: "normal"}}>{blackPrisoners}</span>
                 </a>
@@ -66,8 +75,13 @@ export default class extends React.Component {
             </div>
             <div className='gvreset gvwhite-prisoners-outer'>
               <span className='gvreset gvbutton'>
-                <a href='javascript:void(0)'>
-                  <div className='gvreset gvsprite-15-white_dead' style={{display: 'inline-block', margin: -2, marginRight: 2}}/>
+                <a href='javascript:void(0)'
+                   onMouseOver={this.customEventTrigger('toggleWhitePrisoners', true)}
+                   onMouseOut={this.customEventTrigger('toggleWhitePrisoners', false)}
+                >
+                  <div className='gvreset gvsprite-15-white_dead'
+                       style={{display: 'inline-block', margin: -2, marginRight: 2}}>
+                  </div>
                   &nbsp;
                   <span className='gvreset gvcontrol-text' style={{fontWeight: "normal"}}>{whitePrisoners}</span>
                 </a>
@@ -78,5 +92,6 @@ export default class extends React.Component {
       </div>
     );
   }
-}
+
+});
 

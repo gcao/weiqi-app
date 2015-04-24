@@ -1,12 +1,11 @@
 'use strict';
 
-import React from 'react';
+import React       from 'react';
 
 export default React.createClass({
   render: function() {
     return (
-      <div>
-      </div>
+      <div></div>
     );
   }
 
