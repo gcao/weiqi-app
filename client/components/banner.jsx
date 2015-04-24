@@ -50,6 +50,8 @@ export default React.createClass({
         <div className='gvreset gvmove-outer gvbutton'>
           <a className='gvreset'
              style={{verticalAlign: 'middle'}}
+             href="javascript:void(0)"
+             onClick={this.customEventTrigger('goTo')}
              title='Jump to XX [Alt Shift G]'>
             &nbsp;
             <span className='gvreset gvcontrol-text'>{moveNumber}</span>

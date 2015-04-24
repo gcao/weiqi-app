@@ -160,36 +160,30 @@ export default React.createClass({
         return;
       }
 
-      var _this = this;
-      while (this.state.gameState.isOnBranch()){
-        this.back();
+      var gameState = this.state.gameState;
+      while (gameState.isOnBranch()){
+        gameState.back();
       }
-      if (n >= this.state.gameState.game.getMoves()){
-        this.forwardAll();
+      if (n >= gameState.game.getMoves()){
+        gameState.forwardAll();
       } else if (n <= 0) {
-        this.backAll();
-      } else if (n > this.state.gameState.currentNode.moveNumber) {
-        var changed = false;
-        while(n > this.state.gameState.currentNode.moveNumber){
-          if (!this.state.gameState.forward())
+        gameState.backAll();
+      } else if (n > gameState.currentNode.moveNumber) {
+        while(n > gameState.currentNode.moveNumber){
+          if (!gameState.forward())
             break;
-          changed = true;
         }
-        if (changed)
-          this.triggerRender();
-      } else if (n < this.state.gameState.currentNode.moveNumber) {
-        var changed = false;
-        while(n < this.state.gameState.currentNode.moveNumber){
-          if (!this.state.gameState.back())
+      } else if (n < gameState.currentNode.moveNumber) {
+        while(n < gameState.currentNode.moveNumber){
+          if (!gameState.back())
             break;
-          changed = true;
         }
-        if (changed)
-          this.triggerRender();
       }
+      this.triggerRender();
     },
 
-    goToBranch: function(n){
+    goToBranch: function(event){
+      var n = event.detail;
       if (this.state.gameState.goToBranch(n))
         this.triggerRender();
     }

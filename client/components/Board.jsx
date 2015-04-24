@@ -18,7 +18,7 @@ export default React.createClass({
         >
           <Stones gameState={this.props.gameState}/>
           <Marks  gameState={this.props.gameState}/>
-          <BranchMarks ctx={this.props.ctx}/>
+          <BranchMarks gameState={this.props.gameState}/>
           <MoveMark ctx={this.props.ctx}/>
           <Prisoners
             showBlackPrisoners={this.props.config.showBlackPrisoners}

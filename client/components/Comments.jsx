@@ -10,7 +10,7 @@ export default React.createClass({
     if (node.comment) {
       return (
         <div className='gvreset gvcomment'>
-          <BranchLinks ctx={this.props.ctx}/>
+          <BranchLinks node={node}/>
           <strong>{jsgvTranslations['comment_for'].replace(/MOVE/,node.moveNumber)}</strong><br/>
           {node.comment}
         </div>
