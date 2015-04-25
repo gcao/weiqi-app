@@ -16,7 +16,7 @@ export default React.createClass({
     var area = xyToArea(x,y,21);
 
     var moveNumberChild;
-    if (this.props.showMoveNumber && moveNumber > 0) {
+    if (moveNumber > 0) {
       var colorName = color == models.STONE_BLACK ? "white" : "black";
       var fontSize = "medium";
       var left = 0;

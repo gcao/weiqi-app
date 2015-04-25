@@ -3,19 +3,16 @@
 import jQuery from '../lib/jquery';
 import './translations';
 
-export default {
-  WEIQI: 0,
-  DAOQI: 1,
+var EN_US = "en_us";
+var ZH_CN = "zh_cn";
 
-  EN_US: "en_us",
-  ZH_CN: "zh_cn",
-  LOCALES: ["en_us", "zh_cn"],
+export default {
+  EN_US: EN_US,
+  ZH_CN: ZH_CN,
+  LOCALES: [EN_US, ZH_CN],
 
   CONFIG: {
-    baseDir: "/jsgameviewer/",
-    viewDir: "/jsgameviewer/view/",
     locale: jsgvTranslations.locale,
-    gameType: 0,
     boardSize: 19,
     playerInterval: 5,
     observerInterval: 15,
@@ -35,12 +32,6 @@ export default {
         ;
     }
     return "GV"+i;
-  },
-
-  createClass: function() {
-    return function() {
-      this.initialize.apply(this, arguments);
-    }
   },
 
   clone: function(myObj){

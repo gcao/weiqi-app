@@ -18,6 +18,7 @@ export default React.createClass({
 
   getInitialState: function() {
     var config = {
+      locale             : Weiqi.ZH_CN,
       verticalLayout     : false,
       gridSize           : 21,
       fastMode           : 10,
@@ -51,7 +52,8 @@ export default React.createClass({
   },
 
   customEvents: {
-    changeLocale: function(newLocale) {
+    changeLocale: function(event) {
+      var newLocale = event.detail;
       if (this.state.config.locale === newLocale)
         return;
 
@@ -62,7 +64,7 @@ export default React.createClass({
 
       this.state.config.locale = newLocale;
       window.jsgvTranslations = window["jsgv_" + newLocale];
-      this.triggerRender()();
+      this.triggerRender();
     },
 
     toggleBlackPrisoners: function(event) {
@@ -72,6 +74,23 @@ export default React.createClass({
 
     toggleWhitePrisoners: function(event) {
       this.state.config.showWhitePrisoners = !!event.detail;
+      this.triggerRender();
+    },
+
+    showMousePosition: function(event) {
+      this.state.mouseX = event.detail.x;
+      this.state.mouseY = event.detail.y;
+      this.triggerRender();
+    },
+
+    hideMousePosition: function(event) {
+      this.state.mouseX = -1;
+      this.state.mouseY = -1;
+      this.triggerRender();
+    },
+
+    toggleNumber: function(){
+      this.state.config.showMoveNumber = !this.state.config.showMoveNumber;
       this.triggerRender();
     },
 
@@ -190,17 +209,6 @@ export default React.createClass({
 
   },
 
-  setMousePosition: function(x, y) {
-    this.mouseX = x;
-    this.mouseY = y;
-    this.triggerRender();
-  },
-
-  toggleNumber: function(){
-    this.state.config.showMoveNumber = !this.state.config.showMoveNumber;
-    this.triggerRender();
-  },
-
   triggerRender: function() {
     this.setState({config: this.state.config});
   },
@@ -208,10 +216,10 @@ export default React.createClass({
   render: function() {
     return (
       <div className='gvreset gameviewer'>
-        <Banner gameState={this.state.gameState}/>
-        <Board config={this.state.config} gameState={this.state.gameState}/>
-        <Toolbar config={this.state.config} gameState={this.state.gameState}/>
-        <div align='center' className='gvreset gvpoint-label'></div>
+        <Banner    config={this.state.config} gameState={this.state.gameState}
+                   mouseX={this.state.mouseX} mouseY={this.state.mouseY}/>
+        <Board     config={this.state.config} gameState={this.state.gameState}/>
+        <Toolbar   config={this.state.config} gameState={this.state.gameState}/>
         <RightPane config={this.state.config} gameState={this.state.gameState}/>
       </div>
     );

@@ -18,15 +18,6 @@ var PROPERTY_COMMENT    = 5;
 var PROPERTY_EDIT_MARK  = 6;
 var PROPERTY_NAME       = 7;
 
-var MARK_NONE           = 0;
-var MARK_CROSS          = 1;
-var MARK_TRIANGLE       = 2;
-var MARK_SQUARE         = 3;
-var MARK_CIRCLE         = 4;
-var MARK_TEXT           = 5;
-var MARK_TERR_BLACK     = 6;
-var MARK_TERR_WHITE     = 7;
-
 var GM_DAOQI            = "10";
 
 /**
@@ -251,7 +242,7 @@ export default class SGFParser {
 			var color = models.STONE_NONE;
 			var setup = false;
 			var comment = "";
-			var markType = MARK_NONE;
+			var markType = models.MARK_NONE;
 			var markText = "";
 			var currentNode = game.rootNode;
 			var nodeStack = new Array();
@@ -367,31 +358,31 @@ export default class SGFParser {
 						else if (input.charAt(pos) == 'T' && input.charAt(pos + 1) == 'R' &&
 								input.charAt(tmppos = nextNonSpace(input, pos + 2)) == '[') {
 							prop = PROPERTY_EDIT_MARK;
-							markType = MARK_TRIANGLE;
+							markType = models.MARK_TRIANGLE;
 							pos = tmppos;
 						}
 						else if (input.charAt(pos) == 'C' && input.charAt(pos + 1) == 'R' &&
 								input.charAt(tmppos = nextNonSpace(input, pos + 2)) == '[') {
 							prop = PROPERTY_EDIT_MARK;
-							markType = MARK_CIRCLE;
+							markType = models.MARK_CIRCLE;
 							pos = tmppos;
 						}
 						else if (input.charAt(pos) == 'S' && input.charAt(pos + 1) == 'Q' &&
 								input.charAt(tmppos = nextNonSpace(input, pos + 2)) == '[') {
 							prop = PROPERTY_EDIT_MARK;
-							markType = MARK_SQUARE;
+							markType = models.MARK_SQUARE;
 							pos = tmppos;
 						}
 						else if (input.charAt(pos) == 'M' && input.charAt(pos + 1) == 'A' &&
 								input.charAt(tmppos = nextNonSpace(input, pos + 2)) == '[') {
 							prop = PROPERTY_EDIT_MARK;
-							markType = MARK_CROSS;
+							markType = models.MARK_CROSS;
 							pos = tmppos;
 						}
 						else if (input.charAt(pos) == 'L' && input.charAt(pos + 1) == 'B' &&
 								input.charAt(tmppos = nextNonSpace(input, pos + 2)) == '[') {
 							prop = PROPERTY_EDIT_MARK;
-							markType = MARK_TEXT;
+							markType = models.MARK_TEXT;
 							pos = tmppos;
 							oldLabel = false;
 						}
@@ -406,14 +397,14 @@ export default class SGFParser {
 						else if (input.charAt(pos) == 'T' && input.charAt(pos + 1) == 'B' &&
 								input.charAt(tmppos = nextNonSpace(input, pos + 2)) == '[') {
 							prop = PROPERTY_EDIT_MARK;
-							markType = MARK_TERR_BLACK;
+							markType = models.MARK_TERR_BLACK;
 							pos = tmppos;
 							color = models.STONE_BLACK;
 						}
 						else if (input.charAt(pos) == 'T' && input.charAt(pos + 1) == 'W' &&
 								input.charAt(tmppos = nextNonSpace(input, pos + 2)) == '[') {
 							prop = PROPERTY_EDIT_MARK;
-							markType = MARK_TERR_WHITE;
+							markType = models.MARK_TERR_WHITE;
 							pos = tmppos;
 							color = models.STONE_WHITE;
 						}
@@ -522,7 +513,7 @@ export default class SGFParser {
 									markText = "";
 
 									// 'LB' property? Then we need to get the text
-									if (markType == MARK_TEXT) {
+									if (markType == models.MARK_TEXT) {
 										if (input.charAt(pos) != ':')
 											throw createErrorMsg(input, pos);
 
@@ -533,10 +524,10 @@ export default class SGFParser {
 										try {
 											var n = parseInt(markText);
 											// Yes, its a number
-											markType = MARK_TEXT;
+											markType = models.MARK_TEXT;
 										} catch (e) {
 											// Nope, its a letter
-											markType = MARK_TEXT;
+											markType = models.MARK_TEXT;
 										}
 									}
 

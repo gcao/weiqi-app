@@ -13,7 +13,7 @@ export default React.createClass({
       for (var j=0; j<board.size; j++) {
         var color = board[i][j];
         if (color === models.STONE_BLACK || color === models.STONE_WHITE) {
-          var moveNumber = gameState.getMoveNumber(i, j);
+          var moveNumber = this.props.showMoveNumber ? gameState.getMoveNumber(i, j) : 0;
           stones.push(
             <Stone x={i} y={j} color={color} moveNumber={moveNumber}/>
           );

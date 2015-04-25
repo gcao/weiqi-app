@@ -25,11 +25,6 @@ export default React.createClass({
     return (
       <div className='gvreset gvtoolbar'>
         <div className='gvreset gvtb-item'>
-          <a className='gvreset toggleopacity' onClick={this.customEventTrigger('refresh')} title='Refresh game/board [Alt Shift R]'>
-            <div className='gvreset gvsprite-refresh'/>
-          </a>
-        </div>
-        <div className='gvreset gvtb-item'>
           <a className='gvreset toggleopacity' onClick={this.customEventTrigger('toggleNumber')} title='Show/hide move number [Alt Shift M]'>
             <div className={toggleNumberClass}/>
           </a>

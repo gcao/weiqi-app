@@ -4,6 +4,7 @@ import React            from 'react';
 import Weiqi            from '../weiqi';
 import * as models      from '../weiqi/models';
 import CustomEventMixin from './CustomEventMixin';
+import {xyToLabel}      from './utils';
 
 export default React.createClass({
   mixins: [CustomEventMixin],
@@ -32,13 +33,13 @@ export default React.createClass({
         <div className='gvreset gvbanner-overlay'></div>
         <div className='gvreset gvbanner-left'>
           {
-            this.props.locale === Weiqi.ZH_CN
+            this.props.config.locale === Weiqi.ZH_CN
             ? '中文'
             : <a className='gvreset localization' href="javascript:void(0)" onClick={this.customEventTrigger('changeLocale', Weiqi.ZH_CN)}>中文</a>
           }
           &nbsp;|&nbsp;
           {
-            this.props.locale === Weiqi.EN_US
+            this.props.config.locale === Weiqi.EN_US
             ? 'EN'
             : <a className='gvreset localization' href="javascript:void(0)" onClick={this.customEventTrigger('changeLocale', Weiqi.EN_US)}>EN</a>
           }
@@ -89,6 +90,9 @@ export default React.createClass({
                 </a>
               </span>
             </div>
+          </div>
+          <div className='gvreset gvbanner-overlay'>
+            <div style={{float: 'right', width: 45, marginTop: 3, textAlign: 'center', color: '#555'}}>{xyToLabel(this.props.mouseX, this.props.mouseY)}</div>
           </div>
         </div>
       </div>

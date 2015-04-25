@@ -2,6 +2,7 @@
 
 import React       from 'react';
 import * as models from '../weiqi/models';
+import {xyToArea}  from './utils';
 
 export default React.createClass({
   render: function() {
@@ -17,25 +18,25 @@ export default React.createClass({
       var left = area[0], top = area[1], width = area[2], height = area[3];
       var styleClass = "";
       switch(mark[2]){
-        case jsGameViewer.model.MARK_CROSS:
+        case models.MARK_CROSS:
           styleClass = "gvsprite-21-markcross";
           break;
-        case jsGameViewer.model.MARK_TRIANGLE:
+        case models.MARK_TRIANGLE:
           styleClass = "gvsprite-21-marktriangle";
           break;
-        case jsGameViewer.model.MARK_SQUARE:
+        case models.MARK_SQUARE:
           styleClass = "gvsprite-21-marksquare";
           break;
-        case jsGameViewer.model.MARK_CIRCLE:
+        case models.MARK_CIRCLE:
           styleClass = "gvsprite-21-markcircle";
           break;
-        case jsGameViewer.model.MARK_TERR_BLACK:
+        case models.MARK_TERR_BLACK:
           styleClass = "gvsprite-21-markblack";
           break;
-        case jsGameViewer.model.MARK_TERR_WHITE:
+        case models.MARK_TERR_WHITE:
           styleClass = "gvsprite-21-markwhite";
           break;
-        case jsGameViewer.model.MARK_TEXT:
+        case models.MARK_TEXT:
           markNodes.push(
             <div style={{
               position: 'absolute',
