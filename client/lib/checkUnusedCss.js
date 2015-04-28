@@ -6,8 +6,9 @@ import css    from 'css';
 function checkSelector(selector) {
   return !!document.querySelector(selector);
 }
+
 export default function checkUnusedCss(url) {
-  console.log('Checking for unused CSS selector');
+  console.log('Checking for unused CSS selectors in ' + url);
   jQuery.get(url).then(function(resp) {
     var parsed = css.parse(resp);
     //console.log(parsed);

@@ -5,7 +5,7 @@ import {RouterMixin, Transition} from '../router';
 import routes                    from '../routes';
 import WeiqiBoard                from './WeiqiBoard';
 
-import UnusedCssChecker          from '../lib/UnusedCssChecker';
+import checkUnusedCss            from '../lib/checkUnusedCss';
 
 require('../stylesheets/App.scss');
 
@@ -110,7 +110,7 @@ class App extends RouterMixin {
   }
 
   componentDidMount(){
-    UnusedCssChecker('/stylesheets/WeiqiBoard.css');
+    checkUnusedCss('/stylesheets/WeiqiBoard.css');
   }
 }
 
