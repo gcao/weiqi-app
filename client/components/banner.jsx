@@ -12,7 +12,7 @@ export default React.createClass({
   render: function() {
     var moveNumber = 0;
     var totalMoves = 0;
-    var nextPlayerClass = "gvreset nextPlayerImg";
+    var nextPlayerClass = "gvreset next-player-img";
     var blackPrisoners = 0, whitePrisoners = 0;
 
     var gameState = this.props.gameState;

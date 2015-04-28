@@ -5,6 +5,10 @@ guard 'bundler' do
 end
 
 guard 'shell' do
-  watch(%r{^client/stylesheets/.+\.sass$}) { `sass client/stylesheets/WeiqiBoard.sass client/stylesheets/WeiqiBoard.css` }
+  watch(%r{^client/stylesheets/.+\.sass$}) do
+    `sass client/stylesheets/WeiqiBoard.sass client/stylesheets/WeiqiBoard.css`
+    # build/stylesheets/WeiqiBoard.css is only used to check for unused css selectors
+    `cp client/stylesheets/WeiqiBoard.css build/stylesheets/`
+  end
 end
 

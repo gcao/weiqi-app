@@ -18,15 +18,11 @@ export default React.createClass({
 
   getInitialState: function() {
     var config = {
-      locale             : Weiqi.ZH_CN,
-      verticalLayout     : false,
-      gridSize           : 21,
-      fastMode           : 10,
-      showMoveNumber     : false,
-      activeBackground   : "#EECD7A",
-      inactiveBackground : "#CCAB69",
-      boardColor         : "#EECD7A",
-      rightPaneHeight    : 446
+      locale         : Weiqi.ZH_CN,
+      verticalLayout : false,
+      fastMode       : 10,
+      showMoveNumber : false,
+      boardColor     : "#EECD7A",
     };
     var game      = new models.Game();
     var gameState = new models.GameState(game);
