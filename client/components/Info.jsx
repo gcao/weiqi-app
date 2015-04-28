@@ -11,9 +11,9 @@ export default React.createClass({
     var playFirst = "\u00a0&#8592; " + jsgvTranslations['play_first'];
 
     return (
-      <div className='gvreset gvinfo' style={{fontSize: "0.9em"}}>
-        { Weiqi.notNull(game.name)  && <div style={{width: '100%', textAlign: 'center', fontWeight: "bold"}}>{game.name}</div> }
-        <div style={{width: '100%', textAlign: 'center'}}>
+      <div className='gvinfo'>
+        { Weiqi.notNull(game.name)  && <div className="gvname">{game.name}</div> }
+        <div className="gvtime-place">
           { Weiqi.notNull(game.date)  && game.date + '\u00a0 ' }
           { Weiqi.notNull(game.place) && game.place }
         </div>

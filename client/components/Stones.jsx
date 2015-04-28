@@ -21,7 +21,7 @@ export default React.createClass({
       }
     }
     return (
-      <div className='gvreset gvboard-overlay'>{stones}</div>
+      <div className='gvboard-overlay'>{stones}</div>
     );
   }
 

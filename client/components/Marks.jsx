@@ -38,17 +38,11 @@ export default React.createClass({
           break;
         case models.MARK_TEXT:
           markNodes.push(
-            <div style={{
-              position: 'absolute',
+            <div className='gvtext-mark' style={{
               left: left,
               top: top + 1,
               width: width,
               height: height,
-              textAlign: 'center',
-              verticalAlign: 'middle',
-              color: 'red',
-              fontWeight: 'bolder',
-              fontSize: 15,
               backgroundColor: color === models.STONE_NONE ? "#EECD7A" : ''
             }}>{mark[3]}</div>
           );
@@ -57,7 +51,6 @@ export default React.createClass({
       markNodes.push(
         <div className={styleClass}
              style={{
-               position: 'absolute',
                left: left,
                top: top,
                backgroundColor: color === models.STONE_NONE ? "#EECD7A" : ''
@@ -65,7 +58,7 @@ export default React.createClass({
       );
     }
     return (
-      <div className='gvreset gvboard-overlay'>{markNodes}</div>
+      <div className='gvmarks gvboard-overlay'>{markNodes}</div>
     );
   }
 

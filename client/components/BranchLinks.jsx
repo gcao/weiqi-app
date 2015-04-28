@@ -25,7 +25,7 @@ export default React.createClass({
           }.call(this, i));
 
           branchNodes.push(
-            <div className="gvreset gvbutton" style={{position: 'relative', display: 'inline-block', width: 'initial'}}>
+            <div className="gvbranch-link gvbutton">
               <span><a className='branch' href='javascript:void(0)' onClick={clickHandler}>{name}: {label}</a>&nbsp;&nbsp; </span>
             </div>
           );
@@ -34,7 +34,7 @@ export default React.createClass({
     }
 
     return (
-      <div>{branchNodes}</div>
+      <div className="gvbranch-links">{branchNodes}</div>
     );
   }
 

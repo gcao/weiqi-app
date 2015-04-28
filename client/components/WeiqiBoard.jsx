@@ -211,7 +211,7 @@ export default React.createClass({
 
   render: function() {
     return (
-      <div className='gvreset gameviewer'>
+      <div className='gameviewer'>
         <Banner    config={this.state.config} gameState={this.state.gameState}
                    mouseX={this.state.mouseX} mouseY={this.state.mouseY}/>
         <Board     config={this.state.config} gameState={this.state.gameState}/>

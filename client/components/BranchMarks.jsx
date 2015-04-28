@@ -20,17 +20,11 @@ export default React.createClass({
           var left = area[0], top = area[1], width = area[2], height = area[3];
           var {label} = getBranch(node.children, i);
           branchNodes.push(
-            <div style={{
-              position: 'absolute',
+            <div className="gvbranch-mark" style={{
               left: left,
               top: top + 1,
               width: width,
               height: height,
-              textAlign: 'center',
-              verticalAlign: 'middle',
-              color: 'red',
-              fontWeight: 'bolder',
-              fontSize: 15,
               backgroundColor: color === models.STONE_NONE ? "#EECD7A" : ''
             }}>{label}</div>
           );
@@ -39,7 +33,7 @@ export default React.createClass({
     }
 
     return (
-      <div>{branchNodes}</div>
+      <div className="gvbranch-marks">{branchNodes}</div>
     );
   }
 
