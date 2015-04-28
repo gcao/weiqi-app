@@ -2,7 +2,6 @@
 
 import React       from 'react';
 import * as models from '../weiqi/models';
-import {xyToArea}  from './utils';
 
 export default React.createClass({
   render: function() {
@@ -14,8 +13,6 @@ export default React.createClass({
       var mark = marks[i];
       var x = mark[0], y = mark[1];
       var color = gameState.board[x][y];
-      var area = xyToArea(x,y,21);
-      var left = area[0], top = area[1], width = area[2], height = area[3];
       var styleClass = "";
       switch(mark[2]){
         case models.MARK_CROSS:
@@ -38,7 +35,7 @@ export default React.createClass({
           break;
         case models.MARK_TEXT:
           markNodes.push(
-            <div className='gvtext-mark' style={{
+            <div className={'gvtext-mark cell x' + x + " y" + y} style={{
               left: left,
               top: top + 1,
               width: width,
@@ -49,10 +46,8 @@ export default React.createClass({
           continue; // skip logic below
       }
       markNodes.push(
-        <div className={styleClass}
+        <div className={styleClass + " x" + x + " y" + y}
              style={{
-               left: left,
-               top: top,
                backgroundColor: color === models.STONE_NONE ? "#EECD7A" : ''
              }}/>
       );

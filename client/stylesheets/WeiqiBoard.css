@@ -1,222 +1,120 @@
-.gameviewer {
-  z-index: 10;
-  clear: both;
-  position: relative;
-  left: 0px;
-  top: 0px;
-  width: 720px;
-  height: 450px;
-  border: 1px solid black;
-  background: #eecd7a;
-  font-family: Arial, Helvetica, sans-serif; }
-  .gameviewer a {
-    text-decoration: none; }
+.x0 {
+  left: 0px; }
 
-.gvtoggleopacity div {
-  filter: alpha(opacity=85);
-  opacity: 0.85;
-  zoom: 1; }
-  .gvtoggleopacity div:hover {
-    filter: alpha(opacity=100);
-    opacity: 1;
-    zoom: 1.2; }
+.x1 {
+  left: 21px; }
 
-.gvdisabled {
-  opacity: 0.4 !important;
-  zoom: 1 !important; }
+.x2 {
+  left: 42px; }
 
-.gvbutton {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  padding: 1px 0px;
-  white-space: nowrap;
-  z-index: 99; }
-  .gvbutton a {
-    display: inline;
-    border-top: 1px solid #eeeeee;
-    border-left: 1px solid #eeeeee;
-    border-right: 1px solid #606060;
-    border-bottom: 1px solid #101010;
-    color: blue;
-    background: #ddbc69;
-    text-decoration: none;
-    padding: 2px 4px 1px 4px;
-    text-align: center; }
-    .gvbutton a:hover {
-      border-top: 1px solid black;
-      border-left: 1px solid #666666;
-      border-right: 1px solid #cccccc;
-      border-bottom: 1px solid #cccccc;
-      color: white;
-      background: #47748e fixed; }
-    .gvbutton a:active {
-      color: white;
-      background: #47748e; }
+.x3 {
+  left: 63px; }
 
-.gvcontrol-text {
-  font-size: larger;
-  font-weight: bold;
-  vertical-align: middle; }
+.x4 {
+  left: 84px; }
 
-.gvbanner {
-  position: absolute;
-  left: 2px;
-  top: 2px;
-  width: 468px;
-  height: 25px; }
-  .gvbanner div {
-    display: inline-block; }
-  .gvbanner a, .gvbanner span {
-    vertical-align: middle; }
+.x5 {
+  left: 105px; }
 
-.gvbanner-overlay {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%; }
+.x6 {
+  left: 126px; }
 
-.gvbanner-left {
-  display: inline;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  padding: 1px 0px;
-  z-index: 100; }
+.x7 {
+  left: 147px; }
 
-.next-player-img {
-  position: relative;
-  top: 2px; }
+.x8 {
+  left: 168px; }
 
-.gvmove-outer {
-  position: absolute;
-  left: 22px;
-  top: 0px;
-  width: 399px;
-  text-align: center; }
+.x9 {
+  left: 189px; }
 
-.gvprisoners-outer {
-  position: absolute;
-  left: 270px;
-  top: 0px;
-  width: 140px; }
-  .gvprisoners-outer .gvprisoner-img {
-    margin: -2px;
-    margin-right: 2px; }
-  .gvprisoners-outer .gvcontrol-text {
-    font-weight: normal; }
+.x10 {
+  left: 210px; }
 
-.gvblack-prisoners-outer {
-  position: absolute;
-  top: 0;
-  width: 50%;
-  text-align: right; }
+.x11 {
+  left: 231px; }
 
-.gvwhite-prisoners-outer {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 50%;
-  text-align: right; }
+.x12 {
+  left: 252px; }
 
-.gvboard-label {
-  float: right;
-  width: 45px;
-  margin-top: 3px;
-  text-align: center;
-  color: #555555; }
+.x13 {
+  left: 273px; }
 
-.gvboard-fascade {
-  z-index: 99; }
+.x14 {
+  left: 294px; }
 
-.gvboard-outer {
-  position: absolute;
-  left: 1px;
-  top: 28px; }
+.x15 {
+  left: 315px; }
 
-.gvboard {
-  position: absolute;
-  left: 22px;
-  top: 2px;
-  width: 399px;
-  height: 399px; }
+.x16 {
+  left: 336px; }
 
-.gvboard-overlay {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%; }
+.x17 {
+  left: 357px; }
 
-.gvstone {
-  position: absolute; }
+.x18 {
+  left: 378px; }
 
-.gvmarks div {
-  position: absolute; }
+.y0 {
+  top: 0px; }
 
-.gvtext-mark, .gvbranch-mark {
-  position: absolute;
-  text-align: center;
-  vertical-align: middle;
-  color: red;
-  font-weight: bolder;
-  font-size: 15px; }
+.y1 {
+  top: 21px; }
 
-.gvmove-mark {
-  position: absolute; }
+.y2 {
+  top: 42px; }
 
-.gvboard-prisoner-outer {
-  position: absolute; }
+.y3 {
+  top: 63px; }
 
-.gvboard-prisoner {
-  margin-left: 3px;
-  margin-top: 3px; }
+.y4 {
+  top: 84px; }
 
-.gvtoolbar {
-  position: absolute;
-  left: 432px;
-  top: 28px;
-  width: 35px;
-  height: 414px; }
+.y5 {
+  top: 105px; }
 
-.gvtb-item {
-  position: relative;
-  text-align: center;
-  background-repeat: no-repeat;
-  background-position: center center;
-  z-index: 1; }
+.y6 {
+  top: 126px; }
 
-.gvright-pane {
-  position: absolute;
-  left: 472px;
-  top: 1px;
-  width: 245px;
-  height: 446px;
-  border: 1px solid gray;
-  background: white;
-  overflow-y: auto; }
+.y7 {
+  top: 147px; }
 
-.gvinfo {
-  margin: 3px;
-  font-size: 0.9em; }
-  .gvinfo .gvname {
-    width: 100%;
-    text-align: center;
-    font-weight: bold; }
-  .gvinfo .gvtime-place {
-    width: 100%;
-    text-align: center; }
+.y8 {
+  top: 168px; }
 
-.gvbranch-link {
-  position: relative;
-  display: inline-block;
-  width: initial; }
+.y9 {
+  top: 189px; }
 
-.gvcomment {
-  margin: 8px 1px 3px;
-  overflow: auto; }
+.y10 {
+  top: 210px; }
+
+.y11 {
+  top: 231px; }
+
+.y12 {
+  top: 252px; }
+
+.y13 {
+  top: 273px; }
+
+.y14 {
+  top: 294px; }
+
+.y15 {
+  top: 315px; }
+
+.y16 {
+  top: 336px; }
+
+.y17 {
+  top: 357px; }
+
+.y18 {
+  top: 378px; }
+
+.cell {
+  width: 21px;
+  height: 21px; }
 
 .gvsprite-15-black {
   width: 15px;
@@ -447,3 +345,223 @@
   width: 20px;
   height: 20px;
   background: url(../images/sprites.png) 0 -3439px; }
+
+.gameviewer {
+  z-index: 10;
+  clear: both;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  width: 720px;
+  height: 450px;
+  border: 1px solid black;
+  background: #eecd7a;
+  font-family: Arial, Helvetica, sans-serif; }
+  .gameviewer a {
+    text-decoration: none; }
+
+.gvtoggleopacity div {
+  filter: alpha(opacity=85);
+  opacity: 0.85;
+  zoom: 1; }
+  .gvtoggleopacity div:hover {
+    filter: alpha(opacity=100);
+    opacity: 1;
+    zoom: 1.2; }
+
+.gvdisabled {
+  opacity: 0.4 !important;
+  zoom: 1 !important; }
+
+.gvbutton {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  padding: 1px 0px;
+  white-space: nowrap;
+  z-index: 99; }
+  .gvbutton a {
+    display: inline;
+    border-top: 1px solid #eeeeee;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #606060;
+    border-bottom: 1px solid #101010;
+    color: blue;
+    background: #ddbc69;
+    text-decoration: none;
+    padding: 2px 4px 1px 4px;
+    text-align: center; }
+    .gvbutton a:hover {
+      border-top: 1px solid black;
+      border-left: 1px solid #666666;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      color: white;
+      background: #47748e fixed; }
+    .gvbutton a:active {
+      color: white;
+      background: #47748e; }
+
+.gvcontrol-text {
+  font-size: larger;
+  font-weight: bold;
+  vertical-align: middle; }
+
+.gvbanner {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 468px;
+  height: 25px; }
+  .gvbanner div {
+    display: inline-block; }
+  .gvbanner a, .gvbanner span {
+    vertical-align: middle; }
+
+.gvbanner-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%; }
+
+.gvbanner-left {
+  display: inline;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 1px 0px;
+  z-index: 100; }
+
+.next-player-img {
+  position: relative;
+  top: 2px; }
+
+.gvmove-outer {
+  position: absolute;
+  left: 22px;
+  top: 0px;
+  width: 399px;
+  text-align: center; }
+
+.gvprisoners-outer {
+  position: absolute;
+  left: 270px;
+  top: 0px;
+  width: 140px; }
+  .gvprisoners-outer .gvprisoner-img {
+    margin: -2px;
+    margin-right: 2px; }
+  .gvprisoners-outer .gvcontrol-text {
+    font-weight: normal; }
+
+.gvblack-prisoners-outer {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  text-align: right; }
+
+.gvwhite-prisoners-outer {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  text-align: right; }
+
+.gvboard-label {
+  float: right;
+  width: 45px;
+  margin-top: 3px;
+  text-align: center;
+  color: #555555; }
+
+.gvboard-fascade {
+  z-index: 99; }
+
+.gvboard-outer {
+  position: absolute;
+  left: 1px;
+  top: 28px; }
+
+.gvboard {
+  position: absolute;
+  left: 22px;
+  top: 2px;
+  width: 399px;
+  height: 399px; }
+
+.gvboard-overlay {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%; }
+
+.gvstone {
+  position: absolute; }
+
+.gvmarks div {
+  position: absolute; }
+
+.gvtext-mark, .gvbranch-mark {
+  position: absolute;
+  text-align: center;
+  vertical-align: middle;
+  color: red;
+  font-weight: bolder;
+  font-size: 15px; }
+
+.gvmove-mark {
+  position: absolute; }
+
+.gvboard-prisoner-outer {
+  position: absolute; }
+
+.gvboard-prisoner {
+  margin-left: 3px;
+  margin-top: 3px; }
+
+.gvtoolbar {
+  position: absolute;
+  left: 432px;
+  top: 28px;
+  width: 35px;
+  height: 414px; }
+
+.gvtb-item {
+  position: relative;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1; }
+
+.gvright-pane {
+  position: absolute;
+  left: 472px;
+  top: 1px;
+  width: 245px;
+  height: 446px;
+  border: 1px solid gray;
+  background: white;
+  overflow-y: auto; }
+
+.gvinfo {
+  margin: 3px;
+  font-size: 0.9em; }
+  .gvinfo .gvname {
+    width: 100%;
+    text-align: center;
+    font-weight: bold; }
+  .gvinfo .gvtime-place {
+    width: 100%;
+    text-align: center; }
+
+.gvbranch-link {
+  position: relative;
+  display: inline-block;
+  width: initial; }
+
+.gvcomment {
+  margin: 8px 1px 3px;
+  overflow: auto; }

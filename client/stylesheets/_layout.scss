@@ -1,0 +1,55 @@
+$grid: 21px;
+
+@mixin left($grid, $i) {
+  left: $grid * $i;
+}
+
+@mixin top($grid, $i) {
+  top: $grid * $i;
+}
+
+.x0  { @include left($grid, 0 ); }
+.x1  { @include left($grid, 1 ); }
+.x2  { @include left($grid, 2 ); }
+.x3  { @include left($grid, 3 ); }
+.x4  { @include left($grid, 4 ); }
+.x5  { @include left($grid, 5 ); }
+.x6  { @include left($grid, 6 ); }
+.x7  { @include left($grid, 7 ); }
+.x8  { @include left($grid, 8 ); }
+.x9  { @include left($grid, 9 ); }
+.x10 { @include left($grid, 10); }
+.x11 { @include left($grid, 11); }
+.x12 { @include left($grid, 12); }
+.x13 { @include left($grid, 13); }
+.x14 { @include left($grid, 14); }
+.x15 { @include left($grid, 15); }
+.x16 { @include left($grid, 16); }
+.x17 { @include left($grid, 17); }
+.x18 { @include left($grid, 18); }
+
+.y0  { @include top($grid, 0 ); }
+.y1  { @include top($grid, 1 ); }
+.y2  { @include top($grid, 2 ); }
+.y3  { @include top($grid, 3 ); }
+.y4  { @include top($grid, 4 ); }
+.y5  { @include top($grid, 5 ); }
+.y6  { @include top($grid, 6 ); }
+.y7  { @include top($grid, 7 ); }
+.y8  { @include top($grid, 8 ); }
+.y9  { @include top($grid, 9 ); }
+.y10 { @include top($grid, 10); }
+.y11 { @include top($grid, 11); }
+.y12 { @include top($grid, 12); }
+.y13 { @include top($grid, 13); }
+.y14 { @include top($grid, 14); }
+.y15 { @include top($grid, 15); }
+.y16 { @include top($grid, 16); }
+.y17 { @include top($grid, 17); }
+.y18 { @include top($grid, 18); }
+
+.cell {
+  width: $grid;
+  height: $grid;
+}
+

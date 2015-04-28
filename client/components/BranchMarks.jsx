@@ -1,8 +1,8 @@
 'use strict';
 
-import React                 from 'react';
-import * as models           from '../weiqi/models';
-import {xyToArea, getBranch} from './utils';
+import React       from 'react';
+import * as models from '../weiqi/models';
+import {getBranch} from './utils';
 
 export default React.createClass({
   render: function() {
@@ -16,15 +16,9 @@ export default React.createClass({
         if (child.type == models.NODE_MOVE){
           var x = child.x, y = child.y;
           var color = this.props.gameState.board[x][y];
-          var area = xyToArea(x,y,21);
-          var left = area[0], top = area[1], width = area[2], height = area[3];
           var {label} = getBranch(node.children, i);
           branchNodes.push(
-            <div className="gvbranch-mark" style={{
-              left: left,
-              top: top + 1,
-              width: width,
-              height: height,
+            <div className={"gvbranch-mark cell x" + x + " y" + y} style={{
               backgroundColor: color === models.STONE_NONE ? "#EECD7A" : ''
             }}>{label}</div>
           );

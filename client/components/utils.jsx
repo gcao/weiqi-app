@@ -1,9 +1,5 @@
 'use strict';
 
-export function xyToArea(x,y,gridSize) {
-  return [x*gridSize, y*gridSize, gridSize, gridSize];
-}
-
 var LABELS = ['A','B','C','D','E','F','G','H','J','K','L','M','N','O','P','Q','R','S','T'];
 export function xyToLabel(x,y){
   if (typeof x !== 'number' || typeof y !== 'number') return;
