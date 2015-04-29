@@ -5,7 +5,6 @@ import * as models from '../weiqi/models';
 
 export default React.createClass({
   render: function() {
-    var color = this.props.color;
     var moveNumber = this.props.moveNumber;
 
     var fontSize = "medium";
@@ -18,15 +17,14 @@ export default React.createClass({
     }
 
     return (
-      <div className="gvmove-number cell" style={{display: 'table', overflow: 'hidden'}}>
-        <div style={{display: 'table-cell', verticalAlign: 'middle', top: '50%'}}>
-          <div style={{left: left,
-                       width: '100%',
-                       top: '-50%',
-                       textAlign: 'center',
-                       color: color === models.STONE_BLACK ? 'white' : 'black',
-                       fontFamily: 'times',
-                       fontSize: fontSize}}
+      <div className="gvmove-number cell">
+        <div className="gvmove-number2">
+          <div className="gvmove-number3"
+               style={{
+                       left: left,
+                       color: this.props.color === models.STONE_BLACK ? 'white' : 'black',
+                       fontSize: fontSize
+                     }}
           >{moveNumber}</div>
         </div>
       </div>
