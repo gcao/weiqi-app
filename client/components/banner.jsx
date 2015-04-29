@@ -44,8 +44,8 @@ export default React.createClass({
         </div>
         <div className='gvbanner-overlay'>
           <div className='gvprisoners-outer'>
-            <div className='gvblack-prisoners-outer'>
-              <a className='gvbutton' href='javascript:void(0)'
+            <div className='gvblack-prisoners-outer gvbutton'>
+              <a href='javascript:void(0)'
                  onMouseOver={this.customEventTrigger('toggleBlackPrisoners', true)}
                  onMouseOut={this.customEventTrigger('toggleBlackPrisoners', false)}
               >
@@ -54,8 +54,8 @@ export default React.createClass({
                 <span className='gvcontrol-text'>{gameState.blackPrisoners}</span>
               </a>
             </div>
-            <div className='gvwhite-prisoners-outer'>
-              <a className='gvbutton' href='javascript:void(0)'
+            <div className='gvwhite-prisoners-outer gvbutton'>
+              <a href='javascript:void(0)'
                  onMouseOver={this.customEventTrigger('toggleWhitePrisoners', true)}
                  onMouseOut={this.customEventTrigger('toggleWhitePrisoners', false)}
               >

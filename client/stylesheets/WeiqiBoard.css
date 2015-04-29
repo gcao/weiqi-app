@@ -459,9 +459,9 @@
   .gvmove-number .gvmove-number3 {
     width: 100%;
     top: -50%;
-    text-align: center;
-    font-family: times; }
+    text-align: center; }
   .gvmove-number.gvmove0-9 .gvmove-number3 {
+    margin-top: 2px;
     font-size: medium; }
   .gvmove-number.gvmove10-99 .gvmove-number3 {
     font-size: small; }
