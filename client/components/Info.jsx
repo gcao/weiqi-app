@@ -12,7 +12,7 @@ export default React.createClass({
 
     return (
       <div className='gvinfo'>
-        { Weiqi.notNull(game.name)  && <div className="gvname">{game.name}</div> }
+        { Weiqi.notNull(game.name) && <div className="gvname">{game.name}</div> }
         <div className="gvtime-place">
           { Weiqi.notNull(game.date)  && game.date + '\u00a0 ' }
           { Weiqi.notNull(game.place) && game.place }
@@ -22,13 +22,13 @@ export default React.createClass({
           { jsgvTranslations['white'] }:
           <strong> {game.whiteName} </strong>
           { Weiqi.notNull(game.whiteRank) && "\u00a0(" + game.whiteRank + ")" }
-          { game.getFirstPlayer() == models.STONE_WHITE && playFirst }
+          { game.getFirstPlayer() === models.STONE_WHITE && playFirst }
         </div>
         <div>
           { jsgvTranslations['black'] }:
           <strong> {game.blackName} </strong>
           { Weiqi.notNull(game.blackRank) && "\u00a0(" + game.blackRank + ")" }
-          { game.getFirstPlayer() == models.STONE_BLACK && playFirst }
+          { game.getFirstPlayer() === models.STONE_BLACK && playFirst }
         </div>
         { game.handicap > 0
           ? <div>{ jsgvTranslations['handicap'] }: { game.handicap } </div>

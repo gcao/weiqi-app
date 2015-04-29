@@ -116,22 +116,22 @@
   width: 21px;
   height: 21px; }
 
-.gvsprite-15-black {
+.gvsprite-15-black, .next-player-img.black {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -5px; }
 
-.gvsprite-15-black_dead {
+.gvsprite-15-black_dead, .gvboard-prisoner.black {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -30px; }
 
-.gvsprite-15-white {
+.gvsprite-15-white, .next-player-img.white {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -55px; }
 
-.gvsprite-15-white_dead {
+.gvsprite-15-white_dead, .gvboard-prisoner.white {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -80px; }
@@ -201,7 +201,7 @@
   height: 19px;
   background: url(../images/sprites.png) 0 -1648px; }
 
-.gvsprite-21-black {
+.gvsprite-21-black, .gvmove-number.black, .gvstone.black {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -1677px; }
@@ -256,7 +256,7 @@
   height: 21px;
   background: url(../images/sprites.png) 0 -2764px; }
 
-.gvsprite-21-white {
+.gvsprite-21-white, .gvmove-number.white, .gvstone.white {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2795px; }
@@ -445,6 +445,10 @@
   width: 399px;
   text-align: center; }
 
+.gvmove-number {
+  display: table;
+  overflow: hidden; }
+
 .gvprisoners-outer {
   position: absolute;
   left: 270px;
@@ -501,8 +505,11 @@
 .gvstone {
   position: absolute; }
 
-.gvmarks div {
-  position: absolute; }
+.gvmark {
+  position: absolute;
+  background-color: #eecd7a; }
+  .gvmark.black, .gvmark.white {
+    background-color: none; }
 
 .gvtext-mark, .gvbranch-mark {
   position: absolute;
@@ -510,13 +517,17 @@
   vertical-align: middle;
   color: red;
   font-weight: bolder;
-  font-size: 15px; }
+  font-size: 15px;
+  background-color: #eecd7a; }
+  .gvtext-mark.black, .gvtext-mark.white, .gvbranch-mark.black, .gvbranch-mark.white {
+    background-color: none; }
 
 .gvmove-mark {
   position: absolute; }
 
 .gvboard-prisoner-outer {
-  position: absolute; }
+  position: absolute;
+  background-color: #eecd7a; }
 
 .gvboard-prisoner {
   margin-left: 3px;

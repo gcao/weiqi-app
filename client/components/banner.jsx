@@ -10,23 +10,13 @@ export default React.createClass({
   mixins: [CustomEventMixin],
 
   render: function() {
-    var moveNumber = 0;
-    var totalMoves = 0;
-    var nextPlayerClass = "gvreset next-player-img";
-    var blackPrisoners = 0, whitePrisoners = 0;
-
     var gameState = this.props.gameState;
-    if (gameState) {
-      moveNumber = gameState.currentNode.moveNumber;
-      totalMoves = gameState.game.getMoves();
-      if (gameState.getNextPlayer() === models.STONE_WHITE)
-        nextPlayerClass += " gvsprite-15-white";
-      else
-        nextPlayerClass += " gvsprite-15-black";
 
-      blackPrisoners = gameState.blackPrisoners;
-      whitePrisoners = gameState.whitePrisoners;
-    }
+    var nextPlayerClass = "gvreset next-player-img " + gameState.getNextPlayer();
+    var moveNumber = gameState.currentNode.moveNumber;
+    var totalMoves = gameState.game.getMoves();
+    var blackPrisoners = gameState.blackPrisoners;
+    var whitePrisoners = gameState.whitePrisoners;
 
     return (
       <div className='gvbanner'>

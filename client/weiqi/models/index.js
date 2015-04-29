@@ -3,10 +3,10 @@
 import jQuery from '../../lib/jquery';
 import Weiqi  from '..';
 
-export const STONE_NONE      = 0;
-export const STONE_BLACK     = 1;
-export const STONE_WHITE     = 2;
-export const STONE_ERASE     = 3;
+export const STONE_NONE      = "";
+export const STONE_BLACK     = "black";
+export const STONE_WHITE     = "white";
+export const STONE_ERASE     = "erase";
 
 export const MODE_NORMAL     = 0;
 export const MODE_EDIT       = 1;
@@ -16,16 +16,16 @@ export const NODE_EMPTY      = 0;
 export const NODE_MOVE       = 1;
 export const NODE_PASS       = 2;
 
-export const MARK_NONE       = 0;
-export const MARK_SQUARE     = 1;
-export const MARK_CIRCLE     = 2;
-export const MARK_TRIANGLE   = 3;
-export const MARK_CROSS      = 4;
-export const MARK_TEXT       = 5;
-export const MARK_NUMBER     = 6;
-export const MARK_TERR_BLACK = 7;
-export const MARK_TERR_WHITE = 8;
-export const MARK_STONE      = 9;
+export const MARK_NONE       = "";
+export const MARK_SQUARE     = "square";
+export const MARK_CIRCLE     = "circle";
+export const MARK_TRIANGLE   = "tringle";
+export const MARK_CROSS      = "cross";
+export const MARK_TEXT       = "text";
+export const MARK_NUMBER     = "number";
+export const MARK_TERR_BLACK = "terrain-black";
+export const MARK_TERR_WHITE = "terrain-white";
+export const MARK_STONE      = "stone";
 
 export class MoveNumber {
   constructor(val, depth){

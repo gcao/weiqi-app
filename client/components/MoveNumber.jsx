@@ -8,9 +8,6 @@ export default React.createClass({
     var color = this.props.color;
     var moveNumber = this.props.moveNumber;
 
-    var className = color === models.STONE_BLACK ? 'gvsprite-21-black' : 'gvsprite-21-white';
-
-    var colorName = color == models.STONE_BLACK ? "white" : "black";
     var fontSize = "medium";
     var left = 0;
     if (moveNumber >= 10 && moveNumber < 100){
@@ -23,7 +20,14 @@ export default React.createClass({
     return (
       <div className="gvmove-number cell" style={{display: 'table', overflow: 'hidden'}}>
         <div style={{display: 'table-cell', verticalAlign: 'middle', top: '50%'}}>
-          <div style={{left: left, width: '100%', top: '-50%', textAlign: 'center', color: colorName, fontFamily: 'times', fontSize: fontSize}}>{moveNumber}</div>
+          <div style={{left: left,
+                       width: '100%',
+                       top: '-50%',
+                       textAlign: 'center',
+                       color: color === models.STONE_BLACK ? 'white' : 'black',
+                       fontFamily: 'times',
+                       fontSize: fontSize}}
+          >{moveNumber}</div>
         </div>
       </div>
     );

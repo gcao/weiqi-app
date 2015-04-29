@@ -35,21 +35,12 @@ export default React.createClass({
           break;
         case models.MARK_TEXT:
           markNodes.push(
-            <div className={'gvtext-mark cell x' + x + " y" + y} style={{
-              left: left,
-              top: top + 1,
-              width: width,
-              height: height,
-              backgroundColor: color === models.STONE_NONE ? "#EECD7A" : ''
-            }}>{mark[3]}</div>
+            <div className={'gvtext-mark cell x' + x + " y" + y + " " + color}>{mark[3]}</div>
           );
           continue; // skip logic below
       }
       markNodes.push(
-        <div className={styleClass + " x" + x + " y" + y}
-             style={{
-               backgroundColor: color === models.STONE_NONE ? "#EECD7A" : ''
-             }}/>
+        <div className={"gvmark " + styleClass + " x" + x + " y" + y + " " + color}/>
       );
     }
     return (

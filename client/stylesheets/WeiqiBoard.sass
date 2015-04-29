@@ -108,6 +108,12 @@
   position: relative
   top: 2px
 
+  &.black
+    @extend .gvsprite-15-black
+
+  &.white
+    @extend .gvsprite-15-white
+
 
 .gvmove-outer
   position: absolute
@@ -116,6 +122,16 @@
   width: 399px
   text-align: center
 
+
+.gvmove-number
+  display: table
+  overflow: hidden
+
+  &.black
+    @extend .gvsprite-21-black
+
+  &.white
+    @extend .gvsprite-21-white
 
 .gvprisoners-outer
   position: absolute
@@ -183,10 +199,19 @@
 .gvstone
   position: absolute
 
+  &.black
+    @extend .gvsprite-21-black
 
-.gvmarks
-  div
-    position: absolute
+  &.white
+    @extend .gvsprite-21-white
+
+
+.gvmark
+  position: absolute
+  background-color: #EECD7A
+
+  &.black, &.white
+    background-color: none
 
 
 .gvtext-mark, .gvbranch-mark
@@ -196,6 +221,10 @@
   color: red
   font-weight: bolder
   font-size: 15px
+  background-color: #EECD7A
+
+  &.black, &.white
+    background-color: none
 
 
 .gvmove-mark
@@ -204,11 +233,18 @@
 
 .gvboard-prisoner-outer
   position: absolute
+  background-color: #EECD7A
 
 
 .gvboard-prisoner
   margin-left: 3px
   margin-top: 3px
+
+  &.black
+    @extend .gvsprite-15-black_dead
+
+  &.white
+    @extend .gvsprite-15-white_dead
 
 
 .gvtoolbar
