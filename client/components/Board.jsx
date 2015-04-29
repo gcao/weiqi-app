@@ -28,9 +28,8 @@ export default React.createClass({
     var whitePrisoners = this.props.gameState.whitePrisonerPoints;
 
     return (
-      <div className='gvboard-outer gvsprite-21-board'>
-        <div className='gvboard'
-        >
+      <div className='gvboard'>
+        <div className='gvboard1'>
           <Stones gameState={this.props.gameState} showMoveNumber={this.props.config.showMoveNumber}/>
           <Marks  gameState={this.props.gameState}/>
           <BranchMarks gameState={this.props.gameState}/>
@@ -41,12 +40,10 @@ export default React.createClass({
             blackPrisoners={blackPrisoners}
             whitePrisoners={whitePrisoners}
           />
-          <div className='gvboard-overlay gvboard-fascade'
+          <div className='gvboard-fascade'
                onMouseMove={this.mouseMoveHandler}
                onMouseOut={this.customEventTrigger('hideMousePosition')}
-          >
-            <div className='gvsprite-21-blankboard'/>
-          </div>
+          />
         </div>
       </div>
     );

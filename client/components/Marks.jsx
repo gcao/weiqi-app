@@ -21,17 +21,17 @@ export default React.createClass({
         case models.MARK_TERR_BLACK:
         case models.MARK_TERR_WHITE:
           markNodes.push(
-            <div className={"gvmark gvsprite-21-" + mark[2] + " x" + x + " y" + y + " " + color}/>
+            <div className={"gvmark gv" + mark[2] + " x" + x + " y" + y + " " + color}/>
           );
           break;
         case models.MARK_TEXT:
           markNodes.push(
-            <div className={'gvtext-mark cell x' + x + " y" + y + " " + color}>{mark[3]}</div>
+            <div className={'gvtext-mark x' + x + " y" + y + " " + color}>{mark[3]}</div>
           );
       }
     }
     return (
-      <div className='gvmarks gvboard-overlay'>{markNodes}</div>
+      <div className='gvmarks'>{markNodes}</div>
     );
   }
 

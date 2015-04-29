@@ -9,7 +9,7 @@ export default React.createClass({
     var node = this.props.node;
     if (node.type === models.NODE_MOVE) {
       return (
-        <div className={'gvmove-mark cell gvsprite-21-markmove x' + node.x + ' y' + node.y}/>
+        <div className={'gvmove-mark x' + node.x + ' y' + node.y}/>
       );
     } else {
       return PlaceHolder;

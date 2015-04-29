@@ -10,17 +10,11 @@ export default React.createClass({
   mixins: [CustomEventMixin],
 
   render: function() {
-    var gameState = this.props.gameState;
-
-    var nextPlayerClass = "gvreset next-player-img " + gameState.getNextPlayer();
-    var moveNumber = gameState.currentNode.moveNumber;
+    var gameState  = this.props.gameState;
     var totalMoves = gameState.game.getMoves();
-    var blackPrisoners = gameState.blackPrisoners;
-    var whitePrisoners = gameState.whitePrisoners;
 
     return (
       <div className='gvbanner'>
-        <div className='gvbanner-overlay'></div>
         <div className='gvbanner-left'>
           {
             this.props.config.locale === Weiqi.ZH_CN
@@ -36,14 +30,14 @@ export default React.createClass({
           &nbsp;&nbsp;&nbsp;&nbsp;
           {jsgvTranslations['whose_turn']}
           &nbsp;
-          <div className={nextPlayerClass}/>
+          <div className={"gvnext-player " + gameState.getNextPlayer()}/>
         </div>
-        <div className='gvmove-outer gvbutton'>
+        <div className='gvbanner-move'>
           <a href="javascript:void(0)"
              onClick={this.customEventTrigger('goTo')}
              title='Jump to XX [Alt Shift G]'>
             &nbsp;
-            <span className='gvcontrol-text'>{moveNumber}</span>
+            <span className='gvcontrol-text'>{gameState.currentNode.moveNumber}</span>
             {totalMoves > 0 ? '/' + totalMoves : ''}
             &nbsp;
           </a>
@@ -51,28 +45,24 @@ export default React.createClass({
         <div className='gvbanner-overlay'>
           <div className='gvprisoners-outer'>
             <div className='gvblack-prisoners-outer'>
-              <span className='gvbutton'>
-                <a href='javascript:void(0)'
-                   onMouseOver={this.customEventTrigger('toggleBlackPrisoners', true)}
-                   onMouseOut={this.customEventTrigger('toggleBlackPrisoners', false)}
-                >
-                  <div className='gvprisoner-img gvsprite-15-black_dead'></div>
-                  &nbsp;
-                  <span className='gvcontrol-text'>{blackPrisoners}</span>
-                </a>
-              </span>
+              <a className='gvbutton' href='javascript:void(0)'
+                 onMouseOver={this.customEventTrigger('toggleBlackPrisoners', true)}
+                 onMouseOut={this.customEventTrigger('toggleBlackPrisoners', false)}
+              >
+                <div className='gvprisoner-img'/>
+                &nbsp;
+                <span className='gvcontrol-text'>{gameState.blackPrisoners}</span>
+              </a>
             </div>
             <div className='gvwhite-prisoners-outer'>
-              <span className='gvbutton'>
-                <a href='javascript:void(0)'
-                   onMouseOver={this.customEventTrigger('toggleWhitePrisoners', true)}
-                   onMouseOut={this.customEventTrigger('toggleWhitePrisoners', false)}
-                >
-                  <div className='gvprisoner-img gvsprite-15-white_dead'></div>
-                  &nbsp;
-                  <span className='gvcontrol-text'>{whitePrisoners}</span>
-                </a>
-              </span>
+              <a className='gvbutton' href='javascript:void(0)'
+                 onMouseOver={this.customEventTrigger('toggleWhitePrisoners', true)}
+                 onMouseOut={this.customEventTrigger('toggleWhitePrisoners', false)}
+              >
+                <div className='gvprisoner-img'/>
+                &nbsp;
+                <span className='gvcontrol-text'>{gameState.whitePrisoners}</span>
+              </a>
             </div>
           </div>
           <div className='gvbanner-overlay'>

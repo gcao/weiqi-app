@@ -15,7 +15,7 @@ class App extends RouterMixin {
 
     return (
       <body>
-        <div style={{height: 200}}></div>
+        <div style={{height: 700}}></div>
         <WeiqiBoard url="/games/luo.sgf"/>
       </body>
     );

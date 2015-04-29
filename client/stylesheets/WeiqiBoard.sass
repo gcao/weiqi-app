@@ -29,9 +29,9 @@
     zoom: 1.2
 
 
-.gvdisabled
-  opacity: 0.4 !important
-  zoom: 1 !important
+.gvmove-is-first .gvtb-item .gvdisable-if-first, .gvmove-is-last .gvtb-item .gvdisable-if-last
+  opacity: 0.4
+  zoom: 1
 
 
 .gvbutton
@@ -104,7 +104,7 @@
   z-index: 100
 
 
-.next-player-img
+.gvnext-player
   position: relative
   top: 2px
 
@@ -115,7 +115,8 @@
     @extend .gvsprite-15-white
 
 
-.gvmove-outer
+.gvbanner-move
+  @extend .gvbutton
   position: absolute
   left: 22px
   top: 0px
@@ -124,25 +125,39 @@
 
 
 .gvmove-number
+  @extend .cell
   display: table
   overflow: hidden
 
   &.black
     @extend .gvsprite-21-black
+    color: white
 
   &.white
     @extend .gvsprite-21-white
+    color: black
 
   .gvmove-number2
     display: table-cell
     vertical-align: middle
     top: 50%
 
-    .gvmove-number3
-      width: 100%
-      top: -50%
-      text-align: center
-      font-family: times
+  .gvmove-number3
+    width: 100%
+    top: -50%
+    text-align: center
+    font-family: times
+
+  &.gvmove0-9 .gvmove-number3
+    font-size: medium
+
+  &.gvmove10-99 .gvmove-number3
+    font-size: small
+
+  &.gvmove100-up .gvmove-number3
+    left: 1px
+    font-size: x-small
+
 
 .gvprisoners-outer
   position: absolute
@@ -158,19 +173,25 @@
     font-weight: normal
 
 
-.gvblack-prisoners-outer
-  position: absolute
-  top: 0
-  width: 50%
-  text-align: right
+  .gvblack-prisoners-outer
+    position: absolute
+    top: 0
+    width: 50%
+    text-align: right
+
+    .gvprisoner-img
+      @extend .gvsprite-15-black_dead
 
 
-.gvwhite-prisoners-outer
-  position: absolute
-  left: 50%
-  top: 0
-  width: 50%
-  text-align: right
+  .gvwhite-prisoners-outer
+    position: absolute
+    left: 50%
+    top: 0
+    width: 50%
+    text-align: right
+
+    .gvprisoner-img
+      @extend .gvsprite-15-white_dead
 
 
 .gvboard-label
@@ -182,16 +203,19 @@
 
 
 .gvboard-fascade
+  @extend .gvboard-overlay
+  @extend .gvsprite-21-blankboard
   z-index: 99
 
 
-.gvboard-outer
+.gvboard
+  @extend .gvsprite-21-board
   position: absolute
   left: 1px
   top: 28px
 
 
-.gvboard
+.gvboard1
   position: absolute
   left: 22px
   top: 2px
@@ -207,6 +231,10 @@
   height: 100%
 
 
+.gvstones
+  @extend .gvboard-overlay
+
+
 .gvstone
   position: absolute
 
@@ -217,14 +245,37 @@
     @extend .gvsprite-21-white
 
 
+.gvmarks
+  @extend .gvboard-overlay
+
+
 .gvmark
   position: absolute
 
   &.black, &.white
     background-color: none
 
+.gvmark-cross
+  @extend .gvsprite-21-markcross
+
+.gvmark-triangle
+  @extend .gvsprite-21-marktriangle
+
+.gvmark-square
+  @extend .gvsprite-21-marksquare
+
+.gvmark-circle
+  @extend .gvsprite-21-markcircle
+
+.gvmark-black
+  @extend .gvsprite-21-markblack
+
+.gvmark-white
+  @extend .gvsprite-21-markwhite
+
 
 .gvtext-mark, .gvbranch-mark
+  @extend .cell
   position: absolute
   text-align: center
   vertical-align: middle
@@ -238,23 +289,29 @@
 
 
 .gvmove-mark
+  @extend .gvsprite-21-markmove
+  @extend .cell
   position: absolute
 
 
-.gvboard-prisoner-outer
-  position: absolute
-  background-color: #EECD7A
+.gvboard-prisoners
+  @extend .gvboard-overlay
 
 
 .gvboard-prisoner
-  margin-left: 3px
-  margin-top: 3px
+  @extend .cell
+  position: absolute
+  background-color: #EECD7A
 
-  &.black
+  &.black .gvboard-prisoner1
     @extend .gvsprite-15-black_dead
 
-  &.white
+  &.white .gvboard-prisoner1
     @extend .gvsprite-15-white_dead
+
+  .gvboard-prisoner1
+    margin-left: 3px
+    margin-top: 3px
 
 
 .gvtoolbar
@@ -299,12 +356,13 @@
 
 
 .gvbranch-link
+  @extend .gvbutton
   position: relative
   display: inline-block
   width: initial
 
 
-.gvcomment
+.gvcomments
   margin: 8px 1px 3px
   overflow: auto
 

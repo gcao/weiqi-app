@@ -112,26 +112,26 @@
 .y18 {
   top: 378px; }
 
-.cell {
+.cell, .gvmove-number, .gvtext-mark, .gvbranch-mark, .gvmove-mark, .gvboard-prisoner {
   width: 21px;
   height: 21px; }
 
-.gvsprite-15-black, .next-player-img.black {
+.gvsprite-15-black, .gvnext-player.black {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -5px; }
 
-.gvsprite-15-black_dead, .gvboard-prisoner.black {
+.gvsprite-15-black_dead, .gvprisoners-outer .gvblack-prisoners-outer .gvprisoner-img, .gvboard-prisoner.black .gvboard-prisoner1 {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -30px; }
 
-.gvsprite-15-white, .next-player-img.white {
+.gvsprite-15-white, .gvnext-player.white {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -55px; }
 
-.gvsprite-15-white_dead, .gvboard-prisoner.white {
+.gvsprite-15-white_dead, .gvprisoners-outer .gvwhite-prisoners-outer .gvprisoner-img, .gvboard-prisoner.white .gvboard-prisoner1 {
   width: 15px;
   height: 15px;
   background: url(../images/sprites.png) 0 -80px; }
@@ -211,47 +211,47 @@
   height: 21px;
   background: url(../images/sprites.png) 0 -1708px; }
 
-.gvsprite-21-blankboard {
+.gvsprite-21-blankboard, .gvboard-fascade {
   width: 399px;
   height: 399px;
   background: url(../images/sprites.png) 0 -1739px; }
 
-.gvsprite-21-board {
+.gvsprite-21-board, .gvboard {
   width: 425px;
   height: 420px;
   background: url(../images/sprites.png) 0 -2148px; }
 
-.gvsprite-21-markblack {
+.gvsprite-21-markblack, .gvmark-black {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2578px; }
 
-.gvsprite-21-markcircle {
+.gvsprite-21-markcircle, .gvmark-circle {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2609px; }
 
-.gvsprite-21-markcross {
+.gvsprite-21-markcross, .gvmark-cross {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2640px; }
 
-.gvsprite-21-markmove {
+.gvsprite-21-markmove, .gvmove-mark {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2671px; }
 
-.gvsprite-21-marksquare {
+.gvsprite-21-marksquare, .gvmark-square {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2702px; }
 
-.gvsprite-21-marktriangle {
+.gvsprite-21-marktriangle, .gvmark-triangle {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2733px; }
 
-.gvsprite-21-markwhite {
+.gvsprite-21-markwhite, .gvmark-white {
   width: 21px;
   height: 21px;
   background: url(../images/sprites.png) 0 -2764px; }
@@ -369,11 +369,11 @@
     opacity: 1;
     zoom: 1.2; }
 
-.gvdisabled {
-  opacity: 0.4 !important;
-  zoom: 1 !important; }
+.gvmove-is-first .gvtb-item .gvdisable-if-first, .gvmove-is-last .gvtb-item .gvdisable-if-last {
+  opacity: 0.4;
+  zoom: 1; }
 
-.gvbutton {
+.gvbutton, .gvbanner-move, .gvbranch-link {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -381,7 +381,7 @@
   padding: 1px 0px;
   white-space: nowrap;
   z-index: 99; }
-  .gvbutton a {
+  .gvbutton a, .gvbanner-move a, .gvbranch-link a {
     display: inline;
     border-top: 1px solid #eeeeee;
     border-left: 1px solid #eeeeee;
@@ -392,14 +392,14 @@
     text-decoration: none;
     padding: 2px 4px 1px 4px;
     text-align: center; }
-    .gvbutton a:hover {
+    .gvbutton a:hover, .gvbanner-move a:hover, .gvbranch-link a:hover {
       border-top: 1px solid black;
       border-left: 1px solid #666666;
       border-right: 1px solid #cccccc;
       border-bottom: 1px solid #cccccc;
       color: white;
       background: #47748e fixed; }
-    .gvbutton a:active {
+    .gvbutton a:active, .gvbanner-move a:active, .gvbranch-link a:active {
       color: white;
       background: #47748e; }
 
@@ -434,11 +434,11 @@
   padding: 1px 0px;
   z-index: 100; }
 
-.next-player-img {
+.gvnext-player {
   position: relative;
   top: 2px; }
 
-.gvmove-outer {
+.gvbanner-move {
   position: absolute;
   left: 22px;
   top: 0px;
@@ -448,15 +448,26 @@
 .gvmove-number {
   display: table;
   overflow: hidden; }
+  .gvmove-number.black {
+    color: white; }
+  .gvmove-number.white {
+    color: black; }
   .gvmove-number .gvmove-number2 {
     display: table-cell;
     vertical-align: middle;
     top: 50%; }
-    .gvmove-number .gvmove-number2 .gvmove-number3 {
-      width: 100%;
-      top: -50%;
-      text-align: center;
-      font-family: times; }
+  .gvmove-number .gvmove-number3 {
+    width: 100%;
+    top: -50%;
+    text-align: center;
+    font-family: times; }
+  .gvmove-number.gvmove0-9 .gvmove-number3 {
+    font-size: medium; }
+  .gvmove-number.gvmove10-99 .gvmove-number3 {
+    font-size: small; }
+  .gvmove-number.gvmove100-up .gvmove-number3 {
+    left: 1px;
+    font-size: x-small; }
 
 .gvprisoners-outer {
   position: absolute;
@@ -468,19 +479,17 @@
     margin-right: 2px; }
   .gvprisoners-outer .gvcontrol-text {
     font-weight: normal; }
-
-.gvblack-prisoners-outer {
-  position: absolute;
-  top: 0;
-  width: 50%;
-  text-align: right; }
-
-.gvwhite-prisoners-outer {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 50%;
-  text-align: right; }
+  .gvprisoners-outer .gvblack-prisoners-outer {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    text-align: right; }
+  .gvprisoners-outer .gvwhite-prisoners-outer {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 50%;
+    text-align: right; }
 
 .gvboard-label {
   float: right;
@@ -492,19 +501,19 @@
 .gvboard-fascade {
   z-index: 99; }
 
-.gvboard-outer {
+.gvboard {
   position: absolute;
   left: 1px;
   top: 28px; }
 
-.gvboard {
+.gvboard1 {
   position: absolute;
   left: 22px;
   top: 2px;
   width: 399px;
   height: 399px; }
 
-.gvboard-overlay {
+.gvboard-overlay, .gvboard-fascade, .gvstones, .gvmarks, .gvboard-prisoners {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -533,13 +542,12 @@
 .gvmove-mark {
   position: absolute; }
 
-.gvboard-prisoner-outer {
+.gvboard-prisoner {
   position: absolute;
   background-color: #eecd7a; }
-
-.gvboard-prisoner {
-  margin-left: 3px;
-  margin-top: 3px; }
+  .gvboard-prisoner .gvboard-prisoner1 {
+    margin-left: 3px;
+    margin-top: 3px; }
 
 .gvtoolbar {
   position: absolute;
@@ -581,6 +589,6 @@
   display: inline-block;
   width: initial; }
 
-.gvcomment {
+.gvcomments {
   margin: 8px 1px 3px;
   overflow: auto; }

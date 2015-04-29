@@ -18,7 +18,7 @@ export default React.createClass({
           var color = this.props.gameState.board[x][y];
           var {label} = getBranch(node.children, i);
           branchNodes.push(
-            <div className={"gvbranch-mark cell x" + x + " y" + y + ' ' + color}>{label}</div>
+            <div className={"gvbranch-mark x" + x + " y" + y + ' ' + color}>{label}</div>
           );
         }
       }

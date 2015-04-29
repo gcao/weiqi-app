@@ -25,8 +25,8 @@ export default React.createClass({
           }.call(this, i));
 
           branchNodes.push(
-            <div className="gvbranch-link gvbutton">
-              <span><a className='branch' href='javascript:void(0)' onClick={clickHandler}>{name}: {label}</a>&nbsp;&nbsp; </span>
+            <div className="gvbranch-link">
+              <span><a href='javascript:void(0)' onClick={clickHandler}>{name}: {label}</a>&nbsp;&nbsp; </span>
             </div>
           );
         }

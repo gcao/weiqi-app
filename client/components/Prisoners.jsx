@@ -24,7 +24,7 @@ export default React.createClass({
     }
 
     return (
-      <div className='gvboard-prisoners gvboard-overlay'>{children}</div>
+      <div className='gvboard-prisoners'>{children}</div>
     );
   }
 

@@ -16,16 +16,16 @@ export const NODE_EMPTY      = 0;
 export const NODE_MOVE       = 1;
 export const NODE_PASS       = 2;
 
-export const MARK_NONE       = "marknone";
-export const MARK_SQUARE     = "marksquare";
-export const MARK_CIRCLE     = "markcircle";
-export const MARK_TRIANGLE   = "marktriangle";
-export const MARK_CROSS      = "markcross";
-export const MARK_TEXT       = "marktext";
-export const MARK_NUMBER     = "marknumber";
-export const MARK_TERR_BLACK = "markblack";
-export const MARK_TERR_WHITE = "markwhite";
-export const MARK_STONE      = "markstone";
+export const MARK_NONE       = "mark-none";
+export const MARK_SQUARE     = "mark-square";
+export const MARK_CIRCLE     = "mark-circle";
+export const MARK_TRIANGLE   = "mark-triangle";
+export const MARK_CROSS      = "mark-cross";
+export const MARK_TEXT       = "mark-text";
+export const MARK_NUMBER     = "mark-number";
+export const MARK_TERR_BLACK = "mark-black";
+export const MARK_TERR_WHITE = "mark-white";
+export const MARK_STONE      = "mark-stone";
 
 export class MoveNumber {
   constructor(val, depth){

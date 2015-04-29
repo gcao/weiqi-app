@@ -49,7 +49,7 @@ $grid: 21px;
 .y18 { @include top($grid, 18); }
 
 .cell {
-  width: $grid;
+  width:  $grid;
   height: $grid;
 }
 
