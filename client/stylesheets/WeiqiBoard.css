@@ -116,6 +116,46 @@
   width: 21px;
   height: 21px; }
 
+.gameviewer.gvportrait {
+  width: 430px;
+  height: initial; }
+  .gameviewer.gvportrait .gvinfo {
+    margin: 1px;
+    border: 1px solid gray;
+    background: white;
+    font-size: 0.9em;
+    overflow-y: visible; }
+  .gameviewer.gvportrait .gvbanner {
+    position: relative;
+    width: 421px;
+    top: 1px; }
+  .gameviewer.gvportrait .gvboard {
+    position: initial; }
+    .gameviewer.gvportrait .gvboard .gvboard1 {
+      position: relative; }
+  .gameviewer.gvportrait .gvtoolbar {
+    position: initial;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: initial;
+    text-align: center; }
+    .gameviewer.gvportrait .gvtoolbar .gvtb-item {
+      display: inline-block; }
+  .gameviewer.gvportrait .gvboard-label {
+    float: right;
+    width: 45px;
+    text-align: center;
+    margin-top: -28px;
+    margin-right: 0px; }
+  .gameviewer.gvportrait .gvcomments {
+    margin: 1px;
+    padding: 3px;
+    border: 1px solid gray;
+    background: white; }
+  .gameviewer.gvportrait .gvbranch-links {
+    margin-bottom: 3px; }
+
 .gvsprite-15-black, .gvnext-player.black {
   width: 15px;
   height: 15px;
@@ -494,7 +534,8 @@
 .gvboard-label {
   float: right;
   width: 45px;
-  margin-top: 3px;
+  margin-top: 5px;
+  margin-right: 250px;
   text-align: center;
   color: #555555; }
 
@@ -537,7 +578,10 @@
   font-size: 15px;
   background-color: #eecd7a; }
   .gvtext-mark.black, .gvtext-mark.white, .gvbranch-mark.black, .gvbranch-mark.white {
-    background-color: none; }
+    background-color: inherit; }
+
+.gvtext-mark1, .gvbranch-mark1 {
+  margin-top: 2px; }
 
 .gvmove-mark {
   position: absolute; }

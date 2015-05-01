@@ -4,7 +4,6 @@ import React            from 'react';
 import Weiqi            from '../weiqi';
 import * as models      from '../weiqi/models';
 import CustomEventMixin from './CustomEventMixin';
-import {xyToLabel}      from './utils';
 
 export default React.createClass({
   mixins: [CustomEventMixin],
@@ -64,9 +63,6 @@ export default React.createClass({
                 <span className='gvcontrol-text'>{gameState.whitePrisoners}</span>
               </a>
             </div>
-          </div>
-          <div className='gvbanner-overlay'>
-            <div className='gvboard-label'>{xyToLabel(this.props.mouseX, this.props.mouseY)}</div>
           </div>
         </div>
       </div>

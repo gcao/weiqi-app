@@ -26,7 +26,9 @@ export default React.createClass({
           break;
         case models.MARK_TEXT:
           markNodes.push(
-            <div className={'gvtext-mark x' + x + " y" + y + " " + color}>{mark[3]}</div>
+            <div className={'gvtext-mark x' + x + " y" + y + " " + color}>
+              <div className='gvtext-mark1'>{mark[3]}</div>
+            </div>
           );
       }
     }

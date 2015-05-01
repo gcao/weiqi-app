@@ -9,9 +9,14 @@ import Banner           from './Banner';
 import Board            from './Board';
 import Toolbar          from './Toolbar';
 import RightPane        from './RightPane';
+import Info             from './Info';
+import Comments         from './Comments';
 import CustomEventMixin from './CustomEventMixin';
+import {xyToLabel}      from './utils';
 
 require('../stylesheets/WeiqiBoard.css');
+
+var PORTRAIT = "portrait";
 
 export default React.createClass({
   mixins: [CustomEventMixin],
@@ -19,7 +24,8 @@ export default React.createClass({
   getInitialState: function() {
     var config = {
       locale         : Weiqi.ZH_CN,
-      verticalLayout : false,
+      //layout         : 'default',
+      layout         : PORTRAIT,
       fastMode       : 10,
       showMoveNumber : false,
       boardColor     : "#EECD7A",
@@ -210,15 +216,31 @@ export default React.createClass({
   },
 
   render: function() {
-    return (
-      <div className='gameviewer'>
-        <Banner    config={this.state.config} gameState={this.state.gameState}
-                   mouseX={this.state.mouseX} mouseY={this.state.mouseY}/>
-        <Board     config={this.state.config} gameState={this.state.gameState}/>
-        <Toolbar   config={this.state.config} gameState={this.state.gameState}/>
-        <RightPane config={this.state.config} gameState={this.state.gameState}/>
-      </div>
-    );
+    if (this.state.config.layout === PORTRAIT) {
+      return (
+        <div className={'gameviewer gv' + PORTRAIT}>
+          <Info      game={this.state.gameState.game}/>
+          <Banner    config={this.state.config} gameState={this.state.gameState}
+                     mouseX={this.state.mouseX} mouseY={this.state.mouseY}/>
+          <Board     config={this.state.config} gameState={this.state.gameState}/>
+          <Toolbar   config={this.state.config} gameState={this.state.gameState}/>
+          <div className='gvboard-label'>{xyToLabel(this.state.mouseX, this.state.mouseY)}</div>
+          <Comments  node={this.state.gameState.currentNode}/>
+        </div>
+      );
+    } else {
+      return (
+        <div className={'gameviewer default'}>
+          <Banner    config={this.state.config} gameState={this.state.gameState}
+                     mouseX={this.state.mouseX} mouseY={this.state.mouseY}/>
+          <div className='gvboard-label'>{xyToLabel(this.state.mouseX, this.state.mouseY)}</div>
+          <Board     config={this.state.config} gameState={this.state.gameState}/>
+          <Toolbar   config={this.state.config} gameState={this.state.gameState}/>
+          <RightPane config={this.state.config} gameState={this.state.gameState}/>
+        </div>
+      );
+    }
+
   }
 
 });

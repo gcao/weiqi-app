@@ -1,4 +1,5 @@
 @import _layout.scss
+@import _portrait_layout.sass
 @import _sprites.sass
 
 
@@ -197,7 +198,8 @@
 .gvboard-label
   float: right
   width: 45px
-  margin-top: 3px
+  margin-top: 5px
+  margin-right: 250px
   text-align: center
   color: #555
 
@@ -285,8 +287,10 @@
   background-color: #EECD7A
 
   &.black, &.white
-    background-color: none
+    background-color: inherit
 
+.gvtext-mark1, .gvbranch-mark1
+  margin-top: 2px
 
 .gvmove-mark
   @extend .gvsprite-21-markmove
