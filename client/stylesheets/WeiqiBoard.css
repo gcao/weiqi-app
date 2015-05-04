@@ -121,13 +121,14 @@
   height: initial; }
   .gameviewer.gvportrait .gvinfo {
     margin: 1px;
+    padding: 3px;
     border: 1px solid gray;
     background: white;
     font-size: 0.9em;
     overflow-y: visible; }
   .gameviewer.gvportrait .gvbanner {
     position: relative;
-    width: 421px;
+    width: 426px;
     top: 1px; }
   .gameviewer.gvportrait .gvboard {
     position: initial; }
@@ -135,18 +136,20 @@
       position: relative; }
   .gameviewer.gvportrait .gvtoolbar {
     position: initial;
+    margin-top: 3px;
     top: 0px;
     left: 0px;
     width: 100%;
     height: initial;
     text-align: center; }
     .gameviewer.gvportrait .gvtoolbar .gvtb-item {
-      display: inline-block; }
+      display: inline-block;
+      height: 34px; }
   .gameviewer.gvportrait .gvboard-label {
     float: right;
     width: 45px;
     text-align: center;
-    margin-top: -28px;
+    margin-top: -33px;
     margin-right: 0px; }
   .gameviewer.gvportrait .gvcomments {
     margin: 1px;
@@ -401,17 +404,26 @@
     text-decoration: none; }
 
 .gvtoggleopacity div {
-  filter: alpha(opacity=85);
-  opacity: 0.85;
-  zoom: 1; }
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+  zoom: 1;
+  -ms-zoom: 1;
+  -webkit-zoom: 1;
+  -moz-transform: scale(1, 1); }
   .gvtoggleopacity div:hover {
     filter: alpha(opacity=100);
     opacity: 1;
-    zoom: 1.2; }
+    zoom: 1.2;
+    -ms-zoom: 1.2;
+    -webkit-zoom: 1.2;
+    -moz-transform: scale(1.2, 1.2); }
 
 .gvmove-is-first .gvtb-item .gvdisable-if-first, .gvmove-is-last .gvtb-item .gvdisable-if-last {
-  opacity: 0.4;
-  zoom: 1; }
+  opacity: 0.3;
+  zoom: 1;
+  -ms-zoom: 1;
+  -webkit-zoom: 1;
+  -moz-transform: scale(1, 1); }
 
 .gvbutton, .gvbanner-move, .gvbranch-link {
   position: absolute;
@@ -602,6 +614,7 @@
 
 .gvtb-item {
   position: relative;
+  padding: 2px;
   text-align: center;
   background-repeat: no-repeat;
   background-position: center center;
