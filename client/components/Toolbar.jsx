@@ -14,8 +14,8 @@ export default React.createClass({
     return (
       <div className={'gvtoolbar' + annotation}>
         <div className='gvtb-item'>
-          <a className='gvtoggleopacity' onClick={this.customEventTrigger('toggleNumber')} title='        Show/hide move number [Alt Shift M]'>
-            <div className={this.props.config.showMoveNumber ? " gvsprite-hidenumber" : " gvsprite-shownumber"}/>
+          <a className='gvtoggleopacity' onClick={this.customEventTrigger('showMoveNumber')} title='        Show/hide move number [Alt Shift M]'>
+            <div className="gvsprite-shownumber"/>
           </a>
         </div>
         <div className='gvtb-item'>

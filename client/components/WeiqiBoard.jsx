@@ -27,7 +27,7 @@ export default React.createClass({
       //layout         : 'default',
       layout         : PORTRAIT,
       fastMode       : 10,
-      showMoveNumber : false,
+      showMoveNumber : 0,
       boardColor     : "#EECD7A",
     };
     var game      = new models.Game();
@@ -91,8 +91,15 @@ export default React.createClass({
       this.triggerRender();
     },
 
-    toggleNumber: function(){
-      this.state.config.showMoveNumber = !this.state.config.showMoveNumber;
+    showMoveNumber: function(){
+      var s = prompt('Please enter a number:\n n: show move numbers starting from n\n 0: hide move numbers\n-n: show move number on last n moves', 0);
+      if (!s) return;
+      var n = parseInt(s);
+      if (isNaN(n)) {
+        alert("Not a valid number.");
+        return;
+      }
+      this.state.config.showMoveNumber = n;
       this.triggerRender();
     },
 
