@@ -14,7 +14,8 @@ module.exports = {
   context: __dirname + '/client',
   entry: {
     main: "./components/App.jsx",
-    vendors: ['react', 'page', 'js-csp']
+    WeiqiBoard: ['react', './components/WeiqiBoard.jsx'],
+    vendors: ['page', 'js-csp']
   },
 
   output: {
@@ -29,6 +30,7 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin('WeiqiBoard', 'WeiqiBoard.js'),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'shared.js'),
     new webpack.ProvidePlugin({
       regeneratorRuntime: 'regenerator/runtime'
