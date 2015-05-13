@@ -18,7 +18,7 @@ require('../stylesheets/WeiqiBoard.css');
 
 var PORTRAIT = "portrait";
 
-export default React.createClass({
+var WeiqiBoard = React.createClass({
   mixins: [CustomEventMixin],
 
   getInitialState: function() {
@@ -250,4 +250,24 @@ export default React.createClass({
   }
 
 });
+
+export default WeiqiBoard;
+
+window.WeiqiBoard = WeiqiBoard;
+
+let CONTAINER_HTML = "<div class='gv-container'></div>";
+
+export function showGame(options) {
+  var container;
+
+  if (options.inside) {
+    container = jQuery(CONTAINER_HTML).append(jQuery(options.inside))[0];
+  } else if (options.after) {
+    container = jQuery(CONTAINER_HTML).insertAfter(jQuery(options.after))[0];
+  } else {
+    container = document.body;
+  }
+
+  React.render(<WeiqiBoard url={options.url}/>, container);
+}
 

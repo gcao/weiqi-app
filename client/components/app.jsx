@@ -3,9 +3,8 @@
 import React                     from 'react';
 import {RouterMixin, Transition} from '../router';
 import routes                    from '../routes';
+import SiteHandlers              from '../site_handlers';
 import WeiqiBoard                from './WeiqiBoard';
-
-import checkUnusedCss            from '../lib/checkUnusedCss';
 
 require('../stylesheets/App.scss');
 
@@ -15,8 +14,8 @@ class App extends RouterMixin {
 
     return (
       <body>
-        <div style={{height: 0}}></div>
-        <WeiqiBoard url="/games/luo.sgf"/>
+        {/*<WeiqiBoard url="/games/luo.sgf"/>*/}
+        <a className="game" href="/games/luo.sgf">Luo's game</a>
       </body>
     );
   }
@@ -26,10 +25,11 @@ class App extends RouterMixin {
   }
 
   componentDidMount(){
-    checkUnusedCss('/stylesheets/WeiqiBoard.css');
+    SiteHandlers.invoke();
   }
 }
 
 document.addEventListener('DOMContentLoaded', function(){
   React.render(<App />, document.body);
 });
+
