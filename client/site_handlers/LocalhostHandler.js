@@ -1,7 +1,6 @@
 'use strict';
 
 import jQuery       from '../lib/jquery';
-import React        from 'react';
 import {showGame}   from '../components/WeiqiBoard';
 import SiteHandlers from './SiteHandlers';
 
@@ -14,6 +13,11 @@ export default function LocalhostHandler() {
     var el = jQuery(this);
     var url = el.attr('href');
     showGame({url: url, after: el});
+  });
+
+  jQuery(".sgf").each(function(){
+    var el = jQuery(this);
+    showGame({sgf: el.text(), inside: el});
   });
 
   return true;

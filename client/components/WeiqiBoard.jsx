@@ -30,7 +30,7 @@ var WeiqiBoard = React.createClass({
       showMoveNumber : 0,
       boardColor     : "#EECD7A",
     };
-    var game      = new models.Game();
+    var game      = this.props.sgf ? new SGFParser(Weiqi.WEIQI).parse(this.props.sgf) : new models.Game();
     var gameState = new models.GameState(game);
     return {
       config      : config,
@@ -39,6 +39,10 @@ var WeiqiBoard = React.createClass({
   },
 
   componentWillMount: function() {
+    if (!this.props.url) {
+      return;
+    }
+
     var self = this;
 
     // Load game
@@ -260,14 +264,14 @@ let CONTAINER_HTML = "<div class='gv-container'></div>";
 export function showGame(options) {
   var container;
 
-  if (options.inside) {
-    container = jQuery(CONTAINER_HTML).append(jQuery(options.inside))[0];
-  } else if (options.after) {
-    container = jQuery(CONTAINER_HTML).insertAfter(jQuery(options.after))[0];
-  } else {
-    container = document.body;
-  }
+  //if (options.inside) {
+  //  container = jQuery(CONTAINER_HTML).append(jQuery(options.inside))[0];
+  //} else if (options.after) {
+  //  container = jQuery(CONTAINER_HTML).insertAfter(jQuery(options.after))[0];
+  //} else {
+  //  container = document.body;
+  //}
 
-  React.render(<WeiqiBoard url={options.url}/>, container);
+  //React.render(<WeiqiBoard url={options.url} sgf={options.sgf}/>, container);
 }
 
